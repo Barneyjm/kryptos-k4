@@ -1,0 +1,26 @@
+w10 en best:
+  -5.09 ('w10 enc (1, 2, 7, 0, 5, 3, 6, 8, 4, 9)', 'AZ', 'vig', 'GBRADRUMTORARCETEITALADY')
+  -5.13 ('w10 enc (3, 2, 7, 0, 1, 5, 6, 8, 4, 9)', 'AZ', 'vig', 'MBSAWRUMTOSAYWEMEITALLDE')
+  -5.16 ('w10 enc (6, 2, 3, 0, 1, 8, 5, 7, 4, 9)', 'AZ', 'vig', 'OBTASWORTOSAYPEYMYVAILDF')
+  -5.22 ('w10 enc (1, 5, 3, 2, 0, 7, 6, 9, 4, 8)', 'AZ', 'vig', 'GSTAORTHYORAYPEREAPEOARF')
+  -5.23 ('w10 enc (3, 5, 2, 1, 0, 7, 6, 4, 9, 8)', 'AZ', 'vig', 'OLSMORTHCOSZYWCREAPEOFNE')
+w10 de best:
+  -4.95 ('w10 enc (2, 8, 6, 7, 1, 0, 9, 5, 3, 4)', 'KA', 'beau', 'RATZELRFARRABMERENBEROHI')
+  -4.97 ('w10 enc (2, 9, 7, 3, 5, 8, 0, 4, 6, 1)', 'AZ', 'vb', 'KQMHERMAGRABJNUNISTUNMOR')
+  -5.15 ('w10 enc (2, 8, 6, 4, 7, 0, 9, 5, 3, 1)', 'KA', 'beau', 'SATTELUFARHABMIREIBERHHI')
+  -5.23 ('w10 enc (8, 3, 2, 7, 0, 1, 5, 9, 6, 4)', 'KA', 'vb', 'AUICKARTILLIVLEZAEUFLUIE')
+  -5.30 ('w10 enc (2, 9, 7, 4, 5, 8, 0, 3, 6, 1)', 'AZ', 'vb', 'KQGNERMAGRABURQNISTUNMOO')
+elapsed 9s
+w11 en best:
+  -4.77 ('w11 enc (0, 5, 6, 9, 3, 4, 7, 1, 10, 2, 8)', 'KA', 'vb', 'BATHISDATTHSPBOLNESIGHGE')
+  -4.77 ('w11 enc (4, 9, 5, 0, 3, 1, 8, 6, 2, 10, 7)', 'KA', 'vb', 'USATIONYARJWEESHEENINTOL')
+  -4.77 ('w11 enc (4, 6, 9, 0, 5, 1, 8, 3, 2, 10, 7)', 'KA', 'vb', 'USATLOWGARDWEEDHEENONEML')
+  -4.79 ('w11 enc (0, 5, 6, 10, 3, 4, 7, 1, 9, 2, 8)', 'KA', 'vb', 'DATHISDATTAGPBRUNESIGHGE')
+  -4.80 ('w11 enc (4, 10, 5, 0, 3, 1, 8, 6, 2, 7, 9)', 'KA', 'vb', 'JSATIONYORFIEEYVEENINTOK')
+w11 de best:
+  -4.69 ('w11 enc (8, 2, 9, 10, 0, 7, 3, 1, 5, 4, 6)', 'KA', 'beau', 'HTZUHUTEHETABGFRANDSTIMA')
+  -4.73 ('w11 enc (3, 6, 4, 2, 10, 0, 8, 1, 9, 5, 7)', 'KA', 'vb', 'ABTENBEGARAFOERAGEGEUMML')
+  -4.76 ('w11 enc (3, 2, 9, 10, 0, 7, 8, 1, 5, 4, 6)', 'KA', 'beau', 'HTZUNUTEHSTABIFRANDATIMA')
+  -4.77 ('w11 enc (3, 2, 9, 10, 0, 8, 4, 1, 5, 7, 6)', 'KA', 'beau', 'HTZUNKTETETABOFRANDAHIMG')
+  -4.78 ('w11 enc (3, 2, 9, 10, 0, 8, 6, 1, 5, 4, 7)', 'KA', 'beau', 'HTZUNUTZUETABOFRANDATISC')
+elapsed 111s

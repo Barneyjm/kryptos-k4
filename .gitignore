@@ -1,0 +1,5 @@
+scripts/g*.txt
+scripts/de*.txt
+scripts/quad.npy
+scripts/*.pkl
+__pycache__/

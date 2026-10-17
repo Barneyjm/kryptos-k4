@@ -1,0 +1,5 @@
+enc w=12 periods<= 14: 440,512 nodes, hits 0, 19s
+enc w=13 periods<= 14: 1,080,808 nodes, hits 0, 58s
+enc w=14 periods<= 14: 6,307,551 nodes, hits 0, 303s
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:324: UserWarning: resource_tracker: There appear to be 6 leaked semaphore objects to clean up at shutdown: {'/mp-oqzisco3', '/mp-usnfi7mn', '/mp-l8oss5os', '/mp-elzodwq1', '/mp-u65cu9ou', '/mp-k3lwyxri'}
+  warnings.warn(
