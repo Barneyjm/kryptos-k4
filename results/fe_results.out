@@ -1,0 +1,156 @@
+fe_ results, 2026-10-17. Exact tests unless noted; every tester recovered a planted solution first.
+Shuffled-ciphertext runs are included to calibrate chance hit rates.
+
+=== T1 interrupted / event-driven keyword keys (fe_interrupt.py, MIN 8 checks, 842k dict + 116 clue alphabets) ===
+T1 interrupted keys: 48,411 raw models -> 11,077 distinct with >= 8 checks; alphabets 842,054 (+116 clue for Quag IV)
+planted-solution validation:
+  planted ct_restart_after T=K L=7 vig P=A C=A alph=UNSPEERED/t: recovered=True  (model checks=17, other hits in 20k decoys=3)
+  planted ct_advance T=EU L=5 beau P=AZ C=A alph=CIRCUMAMBULATION/t: recovered=True  (model checks=22, other hits in 20k decoys=148)
+  planted ct_pause T=Q L=11 vig P=A C=KA alph=MASTICATORY/s-rev: recovered=True  (model checks=13, other hits in 20k decoys=2)
+  planted line_restart L=9 beau P=A C=A alph=UNRAVELMENT/s: recovered=True  (model checks=15, other hits in 20k decoys=27)
+K4: 0 Quag I-III hits + 0 Quag IV(clue) hits; expected by chance ~0.03  (314s)
+shuffled0: 0 Quag I-III hits + 0 Quag IV(clue) hits; expected by chance ~0.03  (386s)
+shuffled1: 0 Quag I-III hits + 0 Quag IV(clue) hits; expected by chance ~0.02  (358s)
+
+--- T1b: low threshold (MIN 6) on clue alphabets, Quag I-IV (fe_interrupt_lowmin.py) ---
+MIN=6 K4: 11804 models, 0 hits, chance ~0.03
+MIN=6 shuffled0: 12279 models, 0 hits, chance ~0.03
+MIN=6 shuffled1: 12226 models, 0 hits, chance ~0.03
+MIN=6 shuffled2: 10637 models, 0 hits, chance ~0.03
+MIN=6 shuffled3: 12398 models, 0 hits, chance ~0.03
+MIN=6 shuffled4: 11494 models, 0 hits, chance ~0.03
+
+--- T1c: same models with ARBITRARY independent alphabets per key position (fe_indep2.py; weak, alphabet-free) ---
+planted ct_restart_after T=K L=6 (independent alphabets) recovered: True
+K4: consistent / tested (models with >= 20 same-class pairs): {'ct_restart_after': (296, 4152), 'ct_restart_at': (125, 4176), 'ct_advance': (0, 9477), 'ct_pause': (192, 3242), 'pt_restart_after': (0, 23), 'pt_advance': (0, 4563), 'pt_pause': (74, 598), 'phase_slip': (6, 45), 'word_restart': (3, 219), 'line_restart': (1, 9)}
+K4 strongest consistent models: [(63, 'ct_restart_after T=FV L=4'), (47, 'ct_restart_after T=RV L=5'), (47, 'ct_pause T=RX L=5'), (47, 'ct_pause T=R L=5'), (47, 'ct_pause T=MR L=5'), (47, 'ct_pause T=HR L=5'), (47, 'ct_pause T=CR L=5'), (46, 'ct_restart_after T=PV L=7'), (41, 'ct_restart_after T=TZ L=6'), (40, 'ct_restart_after T=PQ L=7'), (40, 'ct_restart_after T=PQ L=21'), (40, 'ct_restart_after T=MY L=6'), (40, 'ct_restart_after T=FV L=7'), (40, 'ct_pause T=MZ L=6'), (39, 'pt_pause t=A L=6 delta=0')]
+shuffled0: {'ct_restart_after': (246, 4028), 'ct_restart_at': (92, 4043), 'ct_advance': (0, 9477), 'ct_pause': (173, 3308), 'pt_restart_after': (0, 23), 'pt_advance': (0, 4563), 'pt_pause': (65, 598), 'phase_slip': (3, 45), 'word_restart': (4, 219), 'line_restart': (0, 9)}  strongest: [(60, 'ct_pause T=OX L=4'), (49, 'ct_restart_after T=OU L=5'), (47, 'ct_pause T=AK L=5')]
+shuffled1: {'ct_restart_after': (182, 4036), 'ct_restart_at': (44, 4011), 'ct_advance': (0, 9477), 'ct_pause': (72, 3224), 'pt_restart_after': (0, 23), 'pt_advance': (0, 4563), 'pt_pause': (27, 598), 'phase_slip': (1, 45), 'word_restart': (2, 219), 'line_restart': (0, 9)}  strongest: [(51, 'ct_pause T=QZ L=5'), (50, 'ct_restart_after T=PQ L=5'), (48, 'ct_restart_at T=DU L=5')]
+shuffled2: {'ct_restart_after': (287, 3873), 'ct_restart_at': (209, 3888), 'ct_advance': (0, 9477), 'ct_pause': (264, 3248), 'pt_restart_after': (0, 23), 'pt_advance': (0, 4563), 'pt_pause': (78, 598), 'phase_slip': (8, 45), 'word_restart': (2, 219), 'line_restart': (1, 9)}  strongest: [(51, 'ct_pause T=DR L=5'), (49, 'ct_pause T=DZ L=5'), (48, 'ct_restart_after T=GY L=5')]
+
+--- T1d: calibration of the one low-p alphabet-free fit, line_restart L=7 (fe_line7.py) ---
+line_restart L= 2: K4 consistent=False  shuffled fraction consistent=0.0000
+line_restart L= 3: K4 consistent=False  shuffled fraction consistent=0.0000
+line_restart L= 4: K4 consistent=False  shuffled fraction consistent=0.0000
+line_restart L= 5: K4 consistent=False  shuffled fraction consistent=0.0075
+line_restart L= 6: K4 consistent=False  shuffled fraction consistent=0.0100
+line_restart L= 7: K4 consistent=True  shuffled fraction consistent=0.0131
+line_restart L= 8: K4 consistent=False  shuffled fraction consistent=0.3840
+line_restart L= 9: K4 consistent=False  shuffled fraction consistent=0.0000
+line_restart L=10: K4 consistent=False  shuffled fraction consistent=0.5105
+line_restart L=11: K4 consistent=True  shuffled fraction consistent=0.4930
+line_restart L=12: K4 consistent=False  shuffled fraction consistent=0.0230
+line_restart L=13: K4 consistent=True  shuffled fraction consistent=0.6025
+line_restart L=14: K4 consistent=True  shuffled fraction consistent=0.6640
+line_restart L=15: K4 consistent=True  shuffled fraction consistent=0.7315
+line_restart L=16: K4 consistent=True  shuffled fraction consistent=0.7280
+line_restart L=17: K4 consistent=False  shuffled fraction consistent=0.0330
+line_restart L=18: K4 consistent=True  shuffled fraction consistent=0.6860
+line_restart L=19: K4 consistent=False  shuffled fraction consistent=0.0265
+line_restart L=20: K4 consistent=False  shuffled fraction consistent=0.6865
+line_restart L=21: K4 consistent=True  shuffled fraction consistent=0.6830
+line_restart L=22: K4 consistent=True  shuffled fraction consistent=0.6375
+line_restart L=23: K4 consistent=True  shuffled fraction consistent=0.6270
+line_restart L=24: K4 consistent=False  shuffled fraction consistent=0.6515
+line_restart L=25: K4 consistent=True  shuffled fraction consistent=0.6870
+line_restart L=26: K4 consistent=True  shuffled fraction consistent=0.7095
+
+=== T2 Wheatstone cryptograph 27/26 rings, arbitrary inner alphabet (fe_wheatstone.py) ===
+planted-solution validation:
+  planted ring AFO#YBEMXIHQNJTRGPZSCKVUDLW (SUBARIAN/t): recovered=True
+  planted ring ECINVPDJOWSAGLRZTBHMUYF#KQX (STEEPY/t): recovered=True
+  planted ring ZYXWVRQPMKJF#EDCBAHSINOTULG (GLUTTONISH/s-rev): recovered=True
+K4: 21,893,404 outer rings; pass within-crib checks: 0; pass both cribs (some delta): 0 (29s)
+shuffled0: 21,893,404 outer rings; pass within-crib checks: 0; pass both cribs (some delta): 0 (29s)
+shuffled1: 21,893,404 outer rings; pass within-crib checks: 0; pass both cribs (some delta): 0 (30s)
+shuffled2: 21,893,404 outer rings; pass within-crib checks: 0; pass both cribs (some delta): 0 (30s)
+
+=== T3 additive cipher over 27-symbol groups Z27 / Z3^3 / Z9xZ3 (fe_group27.py) ===
+periodic models kept (>= 7 checks): ['periodic L=1', 'periodic L=2', 'periodic L=3', 'periodic L=4', 'periodic L=5', 'periodic L=6', 'periodic L=7', 'periodic L=8', 'periodic L=9', 'periodic L=10', 'periodic L=11', 'periodic L=12', 'periodic L=13', 'periodic L=14', 'periodic L=15', 'periodic L=16', 'periodic L=17', 'periodic L=18', 'periodic L=19', 'periodic L=20', 'periodic L=22', 'periodic L=23']
+planted-solution validation:
+  planted Z27 vig L=7 ITCZE/t-rev#@23: recovered=True (needed 2 key draws for a #-free CT)
+  planted Z3^3 beau L=11 REDETERMINATION/s#@5: recovered=True (needed 43 key draws for a #-free CT)
+  planted Z9xZ3a vig L=5 OCTANTAL/s-rev#@0: recovered=True (needed 10 key draws for a #-free CT)
+  planted Z3^3 vig L=13 DEATHLIKE/t-rev#@14: recovered=True (needed 14 key draws for a #-free CT)
+  planted Z3^3 ct-autokey lag=3: recovered=True
+K4: 22,735,458 embeddings x 4 groups; periodic models periodic L=23 (checks>=7); hits 0 (periodic chance ~0.05) (1613s)
+shuffled0: 22,735,458 embeddings x 4 groups; periodic models periodic L=23 (checks>=7); hits 0 (periodic chance ~0.05) (1519s)
+shuffled1: 22,735,458 embeddings x 4 groups; periodic models periodic L=23 (checks>=7); hits 0 (periodic chance ~0.05) (1138s)
+
+=== Side check: any periodic polyalphabetic with independent alphabets (fe_indep.py) ===
+planted independent-alphabet ciphers L=7,11,13,19 recovered: True
+K4 consistent periods (no slip), L=1..48: [8, 11, 12, 13, 16, 18, 19, 20, 22, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33, 35, 36, 37, 38, 39, 40, 41, 44, 46, 47, 48]
+   class-collision count (24 - #classes) for those: [16, 13, 12, 11, 8, 7, 9, 11, 9, 7, 5, 1, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 11, 9, 7, 6, 5]
+K4 consistent with some phase slip between cribs, L=1..26: [6, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26]
+shuffled CT (200): fraction consistent per L<=26: {1: 0.0, 2: 0.0, 3: 0.0, 4: 0.0, 5: 0.0, 6: 0.21, 7: 0.3, 8: 0.4, 9: 0.0, 10: 0.51, 11: 0.59, 12: 0.55, 13: 0.67, 14: 0.66, 15: 0.02, 16: 0.77, 17: 0.03, 18: 0.71, 19: 0.02, 20: 0.67, 21: 0.66, 22: 0.72, 23: 0.76, 24: 0.84, 25: 0.91, 26: 0.95}
+K4 smallest consistent L: 8  shuffled median smallest L: 8
+
+=== Bonus: periodic affine keys and per-class Vigenere/Beaufort mixing (fe_affine.py, fe_affine_byL.py) ===
+affine periods (classes with >= 3 crib letters checked): {1: [24], 2: [13, 11], 3: [9, 8, 7], 4: [7, 5, 6, 6], 5: [5, 5, 6, 4, 4], 6: [5, 4, 4, 4, 4, 3], 7: [4, 4, 4, 4, 3, 3], 8: [3, 3, 4, 4, 4], 9: [3, 3, 3, 3, 3, 3], 10: [3, 3, 4], 11: [3, 3], 12: [3], 13: []}
+sign-mix periods with >= 7 checks: {1: 23, 2: 22, 3: 21, 4: 20, 5: 19, 6: 18, 7: 16, 8: 13, 9: 12, 10: 7}
+  planted L=7 affine FLIGHT/t: recovered=True; other hits 0
+  planted L=9 sign-mix TRIPHANE/t: recovered=True; other hits 0
+K4: affine hits 4293142 (chance ~4286336.15), sign-mix hits 0 (chance ~0.00) (101s)
+     ('AMETHYST/s', 'A', 'A', 11, 2)
+     ('AMETHYST/s-rev', 'A', 'A', 11, 2)
+     ('ANDROGENOUS/t', 'A', 'A', 11, 2)
+     ('ANDROGENOUS/t-rev', 'A', 'A', 11, 2)
+     ('ANOPLOTHERIUM/t', 'A', 'A', 11, 2)
+     ('ANOPLOTHERIUM/t-rev', 'A', 'A', 11, 2)
+     ('APIOS/t', 'A', 'A', 11, 2)
+     ('APIOS/t-rev', 'A', 'A', 11, 2)
+     ('ARMHOOP/t', 'A', 'A', 11, 2)
+     ('ARMHOOP/t-rev', 'A', 'A', 11, 2)
+shuffled0: affine hits 4295194 (chance ~4286336.15), sign-mix hits 0 (chance ~0.00) (103s)
+     ('ABSCOULOMB/s', 'A', 'A', 11, 2)
+     ('ABSCOULOMB/s-rev', 'A', 'A', 11, 2)
+     ('ACADEMIAN/t', 'A', 'A', 11, 2)
+     ('ACADEMIAN/t-rev', 'A', 'A', 11, 2)
+     ('ACCEPTABLENESS/t', 'A', 'A', 11, 2)
+     ('ACCEPTABLENESS/t-rev', 'A', 'A', 11, 2)
+     ('ACCIPITRARY/s', 'A', 'A', 11, 2)
+     ('ACCIPITRARY/s-rev', 'A', 'A', 11, 2)
+     ('AFTMOST/s', 'A', 'A', 11, 2)
+     ('AFTMOST/s-rev', 'A', 'A', 11, 2)
+shuffled1: affine hits 4287700 (chance ~4286336.15), sign-mix hits 0 (chance ~0.00) (105s)
+     ('ACCUSTOMEDNESS/s', 'A', 'A', 11, 2)
+     ('ACCUSTOMEDNESS/s-rev', 'A', 'A', 11, 2)
+     ('AMBOMALLEAL/s', 'A', 'A', 11, 2)
+     ('AMBOMALLEAL/s-rev', 'A', 'A', 11, 2)
+     ('ANGULARNESS/s', 'A', 'A', 11, 2)
+     ('ANGULARNESS/s-rev', 'A', 'A', 11, 2)
+     ('ANHALONIUM/t', 'A', 'A', 11, 2)
+     ('ANHALONIUM/t-rev', 'A', 'A', 11, 2)
+     ('ANTIMEDICAL/t', 'A', 'A', 11, 2)
+     ('ANTIMEDICAL/t-rev', 'A', 'A', 11, 2)
+shuffled2: affine hits 4292592 (chance ~4286336.15), sign-mix hits 0 (chance ~0.00) (105s)
+     ('ABETTOR/s', 'A', 'A', 11, 2)
+     ('ABETTOR/s-rev', 'A', 'A', 11, 2)
+     ('ACIDITY/t', 'A', 'A', 11, 2)
+     ('ACIDITY/t-rev', 'A', 'A', 11, 2)
+     ('ACYETIC/t', 'A', 'A', 11, 2)
+     ('ACYETIC/t-rev', 'A', 'A', 11, 2)
+     ('ADELGES/s', 'A', 'A', 11, 2)
+     ('ADELGES/s-rev', 'A', 'A', 11, 2)
+     ('ADJUDGER/s', 'A', 'A', 11, 2)
+     ('ADJUDGER/s-rev', 'A', 'A', 11, 2)
+K4 {1: (0, 0.0), 2: (0, 0.0), 3: (0, 0.0), 4: (0, 0.0), 5: (0, 0.0), 6: (0, 0.0), 7: (0, 0.0), 8: (0, 0.0), 9: (0, 0.0), 10: (0, 0.906), 11: (1418, 1326.719), 12: (81436, 74738.521), 13: (4210288, 4210270.0)}
+  K4 hits with L<=10: []
+shuffled {1: (0, 0.0), 2: (0, 0.0), 3: (0, 0.0), 4: (0, 0.0), 5: (0, 0.0), 6: (0, 0.0), 7: (0, 0.0), 8: (0, 0.0), 9: (0, 0.0), 10: (4, 0.906), 11: (1812, 1326.719), 12: (83296, 74738.521), 13: (4210288, 4210270.0)}
+
+=== SUMMARY ===
+T1 interrupted keys: 48,411 models (ct-triggered restart/advance/pause on 351 trigger sets, pt-triggered, phase slip,
+   word restart x 24 segmentations, line restart; L = 1..26 and non-repeating) -> 11,077 distinct with >= 8 checks,
+   over 842,054 alphabets x 5 Quagmire arrangements x vig/beau + Quag IV over 116^2 clue pairs.
+   K4: 0 hits (chance ~0.03); shuffled: 0, 0. Clue-only at >= 6 checks: K4 0 (shuffled 0 x5).
+   Alphabet-free version (arbitrary alphabet per key position): K4 inside the shuffled range for every family (uninformative);
+   single low-p fit line_restart L=7 (p=0.013 per model, ~0.3 after the 25 L values; rests on R->P at 27 and 65).
+T2 Wheatstone 27/26: 21,893,404 structured outer rings, arbitrary inner alphabet: K4 0 pass (shuffled 0,0,0).
+T3 base-27 groups: 22,735,458 embeddings x {Z27, Z3^3, Z9xZ3 (2 splits)}: periodic L=1..20,22,23 (>= 7 checks), ct-autokey and
+   pt-autokey lags 1..26: K4 0 hits (chance ~0.05); shuffled 0, 0.
+Side check: ANY periodic cipher with independent per-class alphabets is impossible for L = 1-7, 9, 10, 14, 15, 17, 21, 25
+   (positions 24/66 both C=V with P=T/L, and 31/73 both C=K with P=A/K: any scheme that reuses one substitution at
+   distance 42 is excluded, i.e. every period dividing 42).
+Bonus affine/sign-mix: periodic affine L=1..10 and per-class Vig/Beau mixing L=1..10: 0 hits (L>=11 undecidable,
+   K4 = chance).
+No candidate decryption; nothing approaches a solve.
