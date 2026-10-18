@@ -1,0 +1,80 @@
+=== Task A2 (clue x dict Chaocipher) Sun Oct 18 01:32:31 2026: 116 clue x 842,054 alphabets x 2 assign x 26 off x 2 dir = 10,158,539,456 rows per ciphertext ===
+cross-check C vs numpy on 48,256 rows: histograms identical = True; clue x clue via C: hist>=7 {7: 32, 8: 4} (expect exactly 2x the earlier [clue] K4 run {7:16, 8:2})
+kernel speed 0.72 M rows/s/process -> estimated 2.9 h for K4 + 2 shuffles with 4 processes
+[planted plantA2-std] rows 60,320  exact(24/24) 1  best partial 24/24 (#rows at best 1)  best EASTNORTHEAST-block 13/13  hist>=7: {7:2, 8:1, 24:1}
+      planted keys: clue=kw:WELTZEITUHR dict=NONSTAINABLE/t-rev; exact rows: ["(24, 13, 'std L=kw:WELTZEITUHR R=NONSTAINABLE/t-rev rotR=17')"]; planted plaintext recovered: True
+[planted plantA2-swap] rows 60,320  exact(24/24) 1  best partial 24/24 (#rows at best 1)  best EASTNORTHEAST-block 13/13  hist>=7: {8:1, 24:1}
+      planted keys: clue=kw:WELTZEITUHR dict=NONSTAINABLE/t-rev; exact rows: ["(24, 13, 'swap L=NONSTAINABLE/t-rev R=kw:WELTZEITUHR rotR=4')"]; planted plaintext recovered: True
+[A2 K4   5.1%] rows 518,752,000  exact(24/24) 0  best partial 10/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:11513, 8:985, 9:59, 10:2}  elapsed 3 min, ETA 58 min
+[A2 K4  10.1%] rows 1,025,440,000  exact(24/24) 0  best partial 10/24 (#rows at best 5)  best EASTNORTHEAST-block 8/13  hist>=7: {7:23181, 8:2002, 9:147, 10:5}  elapsed 6 min, ETA 55 min
+[A2 K4  15.1%] rows 1,532,128,000  exact(24/24) 0  best partial 10/24 (#rows at best 8)  best EASTNORTHEAST-block 8/13  hist>=7: {7:35038, 8:3019, 9:206, 10:8}  elapsed 9 min, ETA 51 min
+[A2 K4  20.1%] rows 2,038,816,000  exact(24/24) 0  best partial 10/24 (#rows at best 10)  best EASTNORTHEAST-block 8/13  hist>=7: {7:46627, 8:3987, 9:281, 10:10}  elapsed 12 min, ETA 48 min
+[A2 K4  25.1%] rows 2,545,504,000  exact(24/24) 0  best partial 10/24 (#rows at best 11)  best EASTNORTHEAST-block 8/13  hist>=7: {7:58462, 8:4983, 9:354, 10:11}  elapsed 15 min, ETA 45 min
+[A2 K4  30.0%] rows 3,052,192,000  exact(24/24) 0  best partial 10/24 (#rows at best 15)  best EASTNORTHEAST-block 8/13  hist>=7: {7:70473, 8:6069, 9:427, 10:15}  elapsed 18 min, ETA 42 min
+[A2 K4  35.0%] rows 3,558,880,000  exact(24/24) 0  best partial 10/24 (#rows at best 17)  best EASTNORTHEAST-block 8/13  hist>=7: {7:82524, 8:7071, 9:485, 10:17}  elapsed 21 min, ETA 38 min
+[A2 K4  40.0%] rows 4,065,568,000  exact(24/24) 0  best partial 10/24 (#rows at best 19)  best EASTNORTHEAST-block 8/13  hist>=7: {7:94038, 8:8086, 9:545, 10:19}  elapsed 24 min, ETA 36 min
+[A2 K4  45.0%] rows 4,572,256,000  exact(24/24) 0  best partial 10/24 (#rows at best 29)  best EASTNORTHEAST-block 8/13  hist>=7: {7:105798, 8:9130, 9:611, 10:29}  elapsed 27 min, ETA 32 min
+[A2 K4  50.1%] rows 5,091,008,000  exact(24/24) 0  best partial 10/24 (#rows at best 30)  best EASTNORTHEAST-block 8/13  hist>=7: {7:117881, 8:10138, 9:690, 10:30}  elapsed 30 min, ETA 29 min
+[A2 K4  55.1%] rows 5,597,696,000  exact(24/24) 0  best partial 10/24 (#rows at best 31)  best EASTNORTHEAST-block 8/13  hist>=7: {7:129403, 8:11053, 9:738, 10:31}  elapsed 32 min, ETA 26 min
+[A2 K4  60.1%] rows 6,104,384,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:140942, 8:12014, 9:802, 10:34, 11:1}  elapsed 35 min, ETA 23 min
+[A2 K4  65.1%] rows 6,611,072,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:152386, 8:12949, 9:851, 10:40, 11:1}  elapsed 38 min, ETA 20 min
+[A2 K4  70.1%] rows 7,117,760,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:163820, 8:13860, 9:903, 10:44, 11:1}  elapsed 41 min, ETA 18 min
+[A2 K4  75.1%] rows 7,624,448,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:175511, 8:14799, 9:976, 10:49, 11:1}  elapsed 44 min, ETA 15 min
+[A2 K4  80.0%] rows 8,131,136,000  exact(24/24) 0  best partial 11/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:187263, 8:15803, 9:1055, 10:51, 11:2}  elapsed 47 min, ETA 12 min
+[A2 K4  85.0%] rows 8,637,824,000  exact(24/24) 0  best partial 11/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:199181, 8:16788, 9:1114, 10:55, 11:2}  elapsed 50 min, ETA 9 min
+[A2 K4  90.0%] rows 9,144,512,000  exact(24/24) 0  best partial 11/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:210414, 8:17700, 9:1170, 10:60, 11:2}  elapsed 53 min, ETA 6 min
+[A2 K4  95.0%] rows 9,651,200,000  exact(24/24) 0  best partial 11/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:221517, 8:18645, 9:1251, 10:61, 11:2}  elapsed 55 min, ETA 3 min
+[A2 K4 100.0%] rows 10,158,539,456  exact(24/24) 0  best partial 11/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:233311, 8:19625, 9:1313, 10:63, 11:2}  elapsed 58 min, ETA 0 min
+[A2 FINAL K4] rows 10,158,539,456  exact(24/24) 0  best partial 11/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:233311, 8:19625, 9:1313, 10:63, 11:2}  (58 min)
+      top: (11, 6, 'std L=kw:CLOCK R=ORLEANISM/t-rev rotR=9')
+      top: (11, 6, 'std L=kwrev:PALIMPSEST R=SEMIPLANTIGRADE/t-rev rotR=17')
+      top: (10, 8, 'std L=kw:XLAYERTWO R=EXTERMINABLE/t-rev rotR=0')
+[A2 shuf0   5.1%] rows 518,752,000  exact(24/24) 0  best partial 10/24 (#rows at best 2)  best EASTNORTHEAST-block 7/13  hist>=7: {7:10691, 8:825, 9:55, 10:2}  elapsed 3 min, ETA 56 min
+[A2 shuf0  10.1%] rows 1,025,440,000  exact(24/24) 0  best partial 10/24 (#rows at best 4)  best EASTNORTHEAST-block 8/13  hist>=7: {7:21028, 8:1669, 9:108, 10:4}  elapsed 6 min, ETA 54 min
+[A2 shuf0  15.1%] rows 1,532,128,000  exact(24/24) 0  best partial 10/24 (#rows at best 12)  best EASTNORTHEAST-block 8/13  hist>=7: {7:31918, 8:2593, 9:156, 10:12}  elapsed 9 min, ETA 49 min
+[A2 shuf0  20.1%] rows 2,038,816,000  exact(24/24) 0  best partial 10/24 (#rows at best 14)  best EASTNORTHEAST-block 8/13  hist>=7: {7:42853, 8:3507, 9:220, 10:14}  elapsed 12 min, ETA 47 min
+[A2 shuf0  25.1%] rows 2,545,504,000  exact(24/24) 0  best partial 10/24 (#rows at best 16)  best EASTNORTHEAST-block 8/13  hist>=7: {7:53636, 8:4416, 9:279, 10:16}  elapsed 15 min, ETA 43 min
+[A2 shuf0  30.0%] rows 3,052,192,000  exact(24/24) 0  best partial 10/24 (#rows at best 19)  best EASTNORTHEAST-block 8/13  hist>=7: {7:64403, 8:5254, 9:326, 10:19}  elapsed 18 min, ETA 41 min
+[A2 shuf0  35.0%] rows 3,558,880,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:74847, 8:6075, 9:393, 10:25, 11:1}  elapsed 20 min, ETA 38 min
+[A2 shuf0  40.0%] rows 4,065,568,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:85549, 8:7030, 9:449, 10:32, 11:1}  elapsed 23 min, ETA 35 min
+[A2 shuf0  45.0%] rows 4,572,256,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:96140, 8:7874, 9:502, 10:33, 11:1}  elapsed 26 min, ETA 32 min
+[A2 shuf0  50.1%] rows 5,091,008,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:106947, 8:8783, 9:590, 10:35, 11:1}  elapsed 29 min, ETA 29 min
+[A2 shuf0  55.1%] rows 5,597,696,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:117635, 8:9668, 9:650, 10:36, 11:1}  elapsed 32 min, ETA 26 min
+[A2 shuf0  60.1%] rows 6,104,384,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:127889, 8:10532, 9:717, 10:40, 11:1}  elapsed 35 min, ETA 23 min
+[A2 shuf0  65.1%] rows 6,611,072,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:138591, 8:11331, 9:783, 10:42, 11:1}  elapsed 37 min, ETA 20 min
+[A2 shuf0  70.1%] rows 7,117,760,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:149142, 8:12161, 9:839, 10:45, 11:1}  elapsed 40 min, ETA 17 min
+[A2 shuf0  75.1%] rows 7,624,448,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:159703, 8:12985, 9:883, 10:48, 11:1}  elapsed 43 min, ETA 14 min
+[A2 shuf0  80.0%] rows 8,131,136,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:170106, 8:13803, 9:948, 10:50, 11:1}  elapsed 46 min, ETA 12 min
+[A2 shuf0  85.0%] rows 8,637,824,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:180298, 8:14574, 9:1012, 10:53, 11:1}  elapsed 49 min, ETA 9 min
+[A2 shuf0  90.0%] rows 9,144,512,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:190736, 8:15376, 9:1060, 10:55, 11:1}  elapsed 52 min, ETA 6 min
+[A2 shuf0  95.0%] rows 9,651,200,000  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:201149, 8:16192, 9:1100, 10:56, 11:1}  elapsed 55 min, ETA 3 min
+[A2 shuf0 100.0%] rows 10,158,539,456  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:211476, 8:17029, 9:1146, 10:57, 11:1}  elapsed 58 min, ETA 0 min
+[A2 FINAL shuf0] rows 10,158,539,456  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:211476, 8:17029, 9:1146, 10:57, 11:1}  (58 min)
+      top: (11, 6, 'std L=FRANCOPHOBE/s-rev R=kwrev:ILLUSION rotR=21')
+      top: (10, 8, 'std L=FRUITTIME/t-rev R=kwrev:URANIAWELTZEITUHR rotR=5')
+      top: (10, 8, 'swap L=kwrev:POSITION R=GASTRODUODENITIS/s rotR=10')
+[A2 shuf1   5.1%] rows 518,752,000  exact(24/24) 0  best partial 11/24 (#rows at best 4)  best EASTNORTHEAST-block 8/13  hist>=7: {7:12842, 8:1337, 9:118, 10:25, 11:4}  elapsed 3 min, ETA 56 min
+[A2 shuf1  10.1%] rows 1,025,440,000  exact(24/24) 0  best partial 11/24 (#rows at best 4)  best EASTNORTHEAST-block 9/13  hist>=7: {7:25212, 8:2466, 9:214, 10:40, 11:4}  elapsed 6 min, ETA 53 min
+[A2 shuf1  15.1%] rows 1,532,128,000  exact(24/24) 0  best partial 11/24 (#rows at best 4)  best EASTNORTHEAST-block 9/13  hist>=7: {7:37407, 8:3653, 9:318, 10:46, 11:4}  elapsed 9 min, ETA 49 min
+[A2 shuf1  20.1%] rows 2,038,816,000  exact(24/24) 0  best partial 11/24 (#rows at best 4)  best EASTNORTHEAST-block 9/13  hist>=7: {7:50016, 8:4886, 9:413, 10:51, 11:4}  elapsed 12 min, ETA 47 min
+[A2 shuf1  25.1%] rows 2,545,504,000  exact(24/24) 0  best partial 11/24 (#rows at best 6)  best EASTNORTHEAST-block 9/13  hist>=7: {7:62417, 8:6086, 9:522, 10:61, 11:6}  elapsed 14 min, ETA 43 min
+[A2 shuf1  30.0%] rows 3,052,192,000  exact(24/24) 0  best partial 11/24 (#rows at best 7)  best EASTNORTHEAST-block 9/13  hist>=7: {7:74545, 8:7168, 9:595, 10:63, 11:7}  elapsed 17 min, ETA 41 min
+[A2 shuf1  35.0%] rows 3,558,880,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:86609, 8:8207, 9:701, 10:66, 11:8, 13:1}  elapsed 20 min, ETA 37 min
+[A2 shuf1  40.0%] rows 4,065,568,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:98846, 8:9334, 9:784, 10:73, 11:9, 13:1}  elapsed 23 min, ETA 35 min
+[A2 shuf1  45.0%] rows 4,572,256,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:111322, 8:10590, 9:909, 10:94, 11:9, 13:1}  elapsed 26 min, ETA 32 min
+[A2 shuf1  50.1%] rows 5,091,008,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:123868, 8:11785, 9:1015, 10:108, 11:10, 13:1}  elapsed 29 min, ETA 29 min
+[A2 shuf1  55.1%] rows 5,597,696,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:136450, 8:13013, 9:1134, 10:117, 11:11, 13:1}  elapsed 32 min, ETA 26 min
+[A2 shuf1  60.1%] rows 6,104,384,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:148712, 8:14159, 9:1231, 10:119, 11:12, 13:1}  elapsed 35 min, ETA 23 min
+[A2 shuf1  65.1%] rows 6,611,072,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:161017, 8:15309, 9:1355, 10:128, 11:13, 13:1}  elapsed 37 min, ETA 20 min
+[A2 shuf1  70.1%] rows 7,117,760,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:173246, 8:16502, 9:1479, 10:145, 11:14, 13:1}  elapsed 40 min, ETA 17 min
+[A2 shuf1  75.1%] rows 7,624,448,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:186057, 8:17729, 9:1575, 10:152, 11:16, 13:1}  elapsed 43 min, ETA 14 min
+[A2 shuf1  80.0%] rows 8,131,136,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:198306, 8:18770, 9:1653, 10:156, 11:17, 13:1}  elapsed 46 min, ETA 11 min
+[A2 shuf1  85.0%] rows 8,637,824,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:210896, 8:19929, 9:1746, 10:164, 11:20, 13:1}  elapsed 49 min, ETA 9 min
+[A2 shuf1  90.0%] rows 9,144,512,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:223449, 8:21089, 9:1841, 10:173, 11:20, 13:1}  elapsed 52 min, ETA 6 min
+[A2 shuf1  95.0%] rows 9,651,200,000  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:235655, 8:22299, 9:1945, 10:183, 11:21, 13:1}  elapsed 55 min, ETA 3 min
+[A2 shuf1 100.0%] rows 10,158,539,456  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:248210, 8:23531, 9:2072, 10:191, 11:21, 13:1}  elapsed 58 min, ETA 0 min
+[A2 FINAL shuf1] rows 10,158,539,456  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:248210, 8:23531, 9:2072, 10:191, 11:21, 13:1}  (58 min)
+      top: (13, 7, 'swap L=kw:LUCID R=GASTROMALACIA/t-rev rotR=1')
+      top: (11, 8, 'swap L=kwrev:QUA R=RINGDOVE/s rotR=7')
+      top: (11, 8, 'swap L=kwrev:UQA R=RINGDOVE/s rotR=7')
+=== Task A2 done Sun Oct 18 04:26:17 2026 ===

@@ -55,3 +55,20 @@ Alphabets: 842,054 dictionary+clue alphabets as Q3 (same both sides), Q1/Q2 with
   which is chance.
 
 CONCLUSION: no Chaocipher or clock-stream configuration reproduces the 24 cribs. No candidate plaintext.
+
+TASK A2: CHAOCIPHER, 116 CLUE ALPHABETS x ALL 842,054 DICTIONARY+CLUE ALPHABETS (sm_taskA_cd.py, C kernel sm_chao_kernel.c; log sm_taskA_cd.out)
+Both disk assignments (clue left / dict right, and dict left / clue right), 26 relative offsets, both directions (std/swap),
+full decryption through position 73, all 24 cribs scored. 10,158,539,456 rows per ciphertext, 4 processes, 58 min each.
+Kernel check: C histograms identical to the numpy sm_taskA.run on 48,256 rows; C clue x clue gives exactly 2x the earlier [clue] K4 histogram.
+  [planted plantA2-std] rows 60,320  exact(24/24) 1  best partial 24/24 (#rows at best 1)  best EASTNORTHEAST-block 13/13  hist>=7: {7:2, 8:1, 24:1}
+  [planted plantA2-swap] rows 60,320  exact(24/24) 1  best partial 24/24 (#rows at best 1)  best EASTNORTHEAST-block 13/13  hist>=7: {8:1, 24:1}
+    planted keys: clue=kw:WELTZEITUHR dict=NONSTAINABLE/t-rev; exact rows: ["(24, 13, 'std L=kw:WELTZEITUHR R=NONSTAINABLE/t-rev rotR=17')"]; planted plaintext recovered: True
+    planted keys: clue=kw:WELTZEITUHR dict=NONSTAINABLE/t-rev; exact rows: ["(24, 13, 'swap L=NONSTAINABLE/t-rev R=kw:WELTZEITUHR rotR=4')"]; planted plaintext recovered: True
+  [A2 FINAL K4] rows 10,158,539,456  exact(24/24) 0  best partial 11/24 (#rows at best 2)  best EASTNORTHEAST-block 8/13  hist>=7: {7:233311, 8:19625, 9:1313, 10:63, 11:2}  (58 min)
+  [A2 FINAL shuf0] rows 10,158,539,456  exact(24/24) 0  best partial 11/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:211476, 8:17029, 9:1146, 10:57, 11:1}  (58 min)
+  [A2 FINAL shuf1] rows 10,158,539,456  exact(24/24) 0  best partial 13/24 (#rows at best 1)  best EASTNORTHEAST-block 9/13  hist>=7: {7:248210, 8:23531, 9:2072, 10:191, 11:21, 13:1}  (58 min)
+    K4 top: (11, 6, 'std L=kw:CLOCK R=ORLEANISM/t-rev rotR=9')
+    K4 top: (11, 6, 'std L=kwrev:PALIMPSEST R=SEMIPLANTIGRADE/t-rev rotR=17')
+    K4 top: (10, 8, 'std L=kw:XLAYERTWO R=EXTERMINABLE/t-rev rotR=0')
+  Result: 0 exact fits on K4. K4's best partial (11/24, ENE-block 8/13) sits inside the shuffled range (11 and 13; blocks 8 and 9).
+  The 7+ tail counts are the same as the shuffles (K4 233k/19.6k/1313/63/2 vs 211k-248k/17k-23.5k/1146-2072/57-191/1-21). Chance-level.
