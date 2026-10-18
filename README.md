@@ -4,6 +4,8 @@ A record of a structured attempt at K4, the unsolved fourth passage of Jim Sanbo
 
 Everything is checked against the 24 plaintext letters Sanborn has released (0-indexed positions 21–33 `EASTNORTHEAST` and 63–73 `BERLINCLOCK`). Every tester was first validated by planting a known solution and confirming it was recovered.
 
+**Hypothesis map:** https://barneyjm.github.io/kryptos-k4/ (pipeline, coverage matrix and ranked gaps; source in `docs/index.html`).
+
 ## Data
 - `data/panel.txt`: full left-panel ciphertext (Elonka Dunin's transcript). It was verified by decrypting K1 (PALIMPSEST) and K2 (ABSCISSA) and by recovering K3's double-rotation method.
 - `data/split.txt`: K1, K2, K3 and K4 ciphertexts, one per line.

@@ -1,0 +1,330 @@
+<title>K4 Hypothesis Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column; a layered "encryption pipeline" band, then a coverage matrix (key structure x alphabet), then ranked gaps. */
+:root {
+  --bg: #eef2f0;          /* patina-tinted paper */
+  --panel: #f8faf9;
+  --fg: #17211f;
+  --muted: #56645f;
+  --rule: #c9d4cf;
+  --accent: #a4572c;      /* oxidised copper */
+  --closed: #4f6f66;      --closed-bg: #dbe6e2;
+  --partial: #8a6412;     --partial-bg: #f3e6c4;
+  --under: #3d5f8a;       --under-bg: #dbe5f2;
+  --gap: #b23a2a;         --gap-bg: #fbe3dd;
+  --none: #8b9692;        --none-bg: #e8ecea;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0f1816; --panel: #15211e; --fg: #e3ebe8; --muted: #9aaba5; --rule: #2b3b37; --accent: #e08a55;
+  --closed: #9cc4b8; --closed-bg: #1d3530; --partial: #e6c06a; --partial-bg: #3a2f14;
+  --under: #9dbbe3; --under-bg: #1b2a3e; --gap: #f08b78; --gap-bg: #3d1d17; --none: #7f8c88; --none-bg: #1b2523;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0f1816; --panel: #15211e; --fg: #e3ebe8; --muted: #9aaba5; --rule: #2b3b37; --accent: #e08a55;
+  --closed: #9cc4b8; --closed-bg: #1d3530; --partial: #e6c06a; --partial-bg: #3a2f14;
+  --under: #9dbbe3; --under-bg: #1b2a3e; --gap: #f08b78; --gap-bg: #3d1d17; --none: #7f8c88; --none-bg: #1b2523;
+  color-scheme: dark }
+
+body { background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 36px 64px; display: grid; gap: 44px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 24px; font-weight: 700; }
+h3 { font-size: 16px; font-weight: 700; }
+p { margin: 0; max-width: 68ch; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.mono { font-family: var(--mono); font-size: .9em; }
+.lede { color: var(--muted); font-size: 17px; }
+header { display: grid; gap: 14px; }
+.ct { font-family: var(--mono); font-size: clamp(11px, 1.6vw, 14px); letter-spacing: .12em; color: var(--muted); word-break: break-all; line-height: 1.7; }
+.ct b { color: var(--accent); font-weight: 600; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 10px 18px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 9px; border-radius: 999px; font-family: var(--mono); font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.s-closed { color: var(--closed); background: var(--closed-bg); }
+.s-partial { color: var(--partial); background: var(--partial-bg); }
+.s-under { color: var(--under); background: var(--under-bg); }
+.s-gap { color: var(--gap); background: var(--gap-bg); }
+.s-none { color: var(--none); background: var(--none-bg); }
+
+section { display: grid; gap: 18px; }
+.sub { color: var(--muted); }
+
+/* pipeline band */
+.pipe { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+.layer { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 14px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.layer .lh { display: grid; gap: 2px; }
+.layer .step { font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.node { display: grid; gap: 3px; padding: 7px 9px 7px 11px; border-radius: 6px; border-left: 4px solid; font-size: 13.5px; line-height: 1.35; }
+.node .n { font-weight: 600; }
+.node .d { font-size: 12px; color: var(--muted); }
+.node.s-closed { border-color: var(--closed); color: var(--fg); }
+.node.s-partial { border-color: var(--partial); color: var(--fg); }
+.node.s-under { border-color: var(--under); color: var(--fg); }
+.node.s-gap { border-color: var(--gap); color: var(--fg); }
+.node.s-none { border-color: var(--none); color: var(--fg); }
+.arrow { display: none; }
+@media (max-width: 900px) { .pipe { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pipe { grid-template-columns: minmax(0, 1fr); } }
+
+/* matrix */
+.scroll { overflow-x: auto; border: 1px solid var(--rule); border-radius: 10px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; min-width: 860px; font-size: 13.5px; }
+th, td { padding: 9px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; text-align: left; }
+thead th { font-family: var(--mono); font-size: 11.5px; font-weight: 600; color: var(--muted); letter-spacing: .03em; background: var(--panel); position: sticky; top: 0; }
+thead th small { display: block; font-weight: 400; color: var(--muted); opacity: .85; }
+tbody th { font-family: var(--display); font-weight: 700; font-size: 14px; width: 190px; }
+tbody th small { display: block; font-family: var(--body); font-weight: 400; color: var(--muted); font-size: 12px; }
+td .pill { margin-bottom: 4px; }
+td .note { display: block; font-size: 12px; color: var(--muted); line-height: 1.35; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
+
+/* evidence + gaps */
+.two { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; }
+@media (max-width: 760px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.ev { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ev li { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 10px; font-size: 14px; }
+.ev .k { font-family: var(--mono); font-size: 11.5px; color: var(--accent); padding-top: 3px; }
+.odds { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+.gaps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; counter-reset: g; }
+.gaps li { counter-increment: g; display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 12px; align-items: start; background: var(--panel); border: 1px solid var(--rule); border-radius: 10px; padding: 14px 16px; }
+.gaps li::before { content: counter(g); font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--accent); line-height: 1; }
+.gaps .body { display: grid; gap: 4px; min-width: 0; }
+.gaps .body p { font-size: 14.5px; color: var(--muted); }
+.gaps .cost { font-family: var(--mono); font-size: 11.5px; color: var(--muted); text-align: right; white-space: nowrap; }
+@media (max-width: 560px) { .gaps li { grid-template-columns: 28px minmax(0, 1fr); } .gaps .cost { grid-column: 2; text-align: left; } }
+footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Kryptos K4 · session map · 2026-10-17 → 18 (overnight update)</div>
+    <h1>What we tried on K4, and where the holes are</h1>
+    <p class="lede">Updated after the overnight gap-filling run: every red cell from the first version was tested, and all came back negative. K4 seen as an encryption pipeline. Each step can be built several ways, and every way we tested is marked with its status. The matrix below crosses key structure with alphabet type. Its empty cells are the gaps.</p>
+    <div class="ct" aria-label="K4 ciphertext with the 24 known plaintext positions highlighted">OBKRUOXOGHULBSOLIFBBW<b>FLRVQQPRNGKSS</b>OTWTQSJQSSEKZZWATJKLUDIAWINFB<b>NYPVTTMZFPK</b>WGDKZXTJCDIGKUHUAUEKCAR</div>
+    <div class="legend">
+      <span class="pill s-closed">ruled out</span>
+      <span class="pill s-partial">partly covered</span>
+      <span class="pill s-under">can't decide with 24 cribs</span>
+      <span class="pill s-gap">not tested yet</span>
+      <span class="pill s-none">n/a or untestable</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="pipe-h">
+    <div><h2 id="pipe-h">The encryption pipeline</h2><p class="sub">From plaintext to ciphertext, one possible step per column. Sanborn's "one-to-one" statement says no reordering step exists, so the last column is mostly moot.</p></div>
+    <div class="pipe">
+      <div class="layer">
+        <div class="lh"><span class="step">Step 1</span><h3>Plaintext prep</h3></div>
+        <div class="node s-closed"><span class="n">None (plain English)</span><span class="d">baseline for every test</span></div>
+        <div class="node s-partial"><span class="n">Arbitrary letter mask</span><span class="d">solved algebraically; periodic keys only</span></div>
+        <div class="node s-closed"><span class="n">Mask + non-periodic key</span><span class="d">mask + autokey, grid, combined, progressive, keyword-through-grid: inconsistent or at shuffled baseline</span></div>
+        <div class="node s-closed"><span class="n">Inserted nulls</span><span class="d">impossible: cribs are 13 and 11 letters with no gaps</span></div>
+        <div class="node s-none"><span class="n">Length-changing transforms</span><span class="d">excluded by the one-to-one statement</span></div>
+      </div>
+      <div class="layer">
+        <div class="lh"><span class="step">Step 2</span><h3>Alphabet</h3></div>
+        <div class="node s-closed"><span class="n">A–Z, KRYPTOS</span><span class="d">every family</span></div>
+        <div class="node s-closed"><span class="n">Clue-word keyed</span><span class="d">~138 English and German words, 13k pairs</span></div>
+        <div class="node s-closed"><span class="n">Dictionary keyed</span><span class="d">842k alphabets × every linear key model, autokey, interrupted keys, running text, Chaocipher, two-stage</span></div>
+        <div class="node s-closed"><span class="n">Sanborn-phrase keyed</span><span class="d">613k alphabets: periodic, digit, running keys, all linear models, autokey</span></div>
+        <div class="node s-closed"><span class="n">Hand-modified A–Z/KA</span><span class="d">1,850 moved or swapped letters</span></div>
+        <div class="node s-closed"><span class="n">Other constructions</span><span class="d">959k alphabets: decimated, reversed remainder, continue-from-last, 19.5k German words</span></div>
+      </div>
+      <div class="layer">
+        <div class="lh"><span class="step">Step 3</span><h3>Key source</h3></div>
+        <div class="node s-closed"><span class="n">Repeating keyword ≤ 26</span><span class="d">exact and with 1–2 slips; lengths 17–26 re-checked after a reporting bug</span></div>
+        <div class="node s-closed"><span class="n">Combined keys, grid keys, formulas</span><span class="d">std/KA, clue, dictionary and constructed alphabets</span></div>
+        <div class="node s-closed"><span class="n">Chain addition / Gromark</span><span class="d">2-term rules, both alphabets free, 2.78B primers</span></div>
+        <div class="node s-closed"><span class="n">Chain addition, 3 terms</span><span class="d">2.27B primers, bases 3–26, free alphabets: chance level</span></div>
+        <div class="node s-closed"><span class="n">Running text (EN/DE)</span><span class="d">scored against shuffled baselines</span></div>
+        <div class="node s-closed"><span class="n">Autokey (forward and backward), progressive</span><span class="d">std/KA, clue, dictionary alphabets; near-miss tail at noise level</span></div>
+        <div class="node s-closed"><span class="n">Interrupted / event-driven keys</span><span class="d">restart or pause on letters, words, carved lines: 11k models × 842k alphabets</span></div>
+        <div class="node s-closed"><span class="n">Clock and date streams</span><span class="d">1.35M Berlin-clock, time-zone and K2-date streams × 8.4M alphabet variants</span></div>
+        <div class="node s-partial"><span class="n">Cipher devices</span><span class="d">M-94, Wheatstone 27/26, Chaocipher (clue × clue, clue × dictionary, dictionary × std) ruled out; strip ciphers need unpublished alphabets</span></div>
+        <div class="node s-none"><span class="n">Key sheet / one-time pad</span><span class="d">unrecoverable from 24 letters</span></div>
+      </div>
+      <div class="layer">
+        <div class="lh"><span class="step">Step 4</span><h3>Combiner</h3></div>
+        <div class="node s-closed"><span class="n">Vigenère, Beaufort, variant</span><span class="d">all three directions</span></div>
+        <div class="node s-closed"><span class="n">Quagmire I–IV</span><span class="d">within the alphabet sets above</span></div>
+        <div class="node s-closed"><span class="n">Hill 2×2 to 4×4</span><span class="d">4×4 forced keys are non-invertible</span></div>
+        <div class="node s-closed"><span class="n">Porta, Playfair, Bifid, Enigma-like</span><span class="d">K→K self-encryption or 26 letters rules them out</span></div>
+        <div class="node s-closed"><span class="n">Base-27 (Z27, Z3³), affine, Vig/Beau mixing</span><span class="d">22.7M embeddings; affine for L ≤ 10</span></div>
+        <div class="node s-partial"><span class="n">Two stages, different tableaux</span><span class="d">std/KA/clue/dictionary pairs, L ≤ 12: at baseline</span></div>
+      </div>
+      <div class="layer">
+        <div class="lh"><span class="step">Step 5</span><h3>Reordering</h3></div>
+        <div class="node s-none"><span class="n">None (per Sanborn)</span><span class="d">"plain B … out pops a cipher N"</span></div>
+        <div class="node s-closed"><span class="n">Columnar, rotations, 1,282 simple</span><span class="d">widths 2–13 with periodic keys</span></div>
+        <div class="node s-partial"><span class="n">Reordering + non-periodic key</span><span class="d">running-key scoring to width 11 only</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mx-h">
+    <div><h2 id="mx-h">Coverage matrix</h2><p class="sub">No reordering, following Sanborn. Rows are how the key is generated; columns are where the alphabet comes from. Red cells are untested combinations.</p></div>
+    <div class="scroll">
+      <table>
+        <thead><tr>
+          <th scope="col">Key structure</th>
+          <th scope="col">A–Z / KRYPTOS<small>2 alphabets</small></th>
+          <th scope="col">Clue words<small>~138 keyed alphabets</small></th>
+          <th scope="col">Sanborn phrases<small>613k keyed alphabets</small></th>
+          <th scope="col">Dictionary words<small>842k keyed alphabets</small></th>
+          <th scope="col">Any alphabet<small>solved algebraically</small></th>
+        </tr></thead>
+        <tbody>
+          <tr><th scope="row">Repeating keyword<small>length 1–26</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">exact + 1–2 slips</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">13,456 pairs, 1–2 slips</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">exact</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">exact + 1 slip, 1.8M alphabets</span></td>
+            <td><span class="pill s-partial">partly</span><span class="note">mask out for L = 1–12, 14, 15, 17, 21, 22; independent alphabets impossible for 1–7, 9, 10, 14, 15, 17, 21, 25</span></td></tr>
+          <tr><th scope="row">Long keyword<small>length 27–96</small></th>
+            <td><span class="pill s-partial">partly</span><span class="note">only specific words and phrases as keys</span></td>
+            <td><span class="pill s-partial">partly</span></td>
+            <td><span class="pill s-partial">partly</span><span class="note">phrase as its own key</span></td>
+            <td><span class="pill s-partial">partly</span><span class="note">8.9M-letter corpus by exact lookup, 81M configs</span></td>
+            <td><span class="pill s-under">undecidable</span></td></tr>
+          <tr><th scope="row">Two combined keys<small>Scheidt "key splits"</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">unknown splits 2–26 each; QUAE + two splits</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">1.8M alphabets</span></td>
+            <td><span class="pill s-under">undecidable</span></td></tr>
+          <tr><th scope="row">Grid key<small>row key + column key</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">widths 2–30, all offsets</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">widths 2–30</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">widths 2–30, all offsets, 1.8M alphabets</span></td>
+            <td><span class="pill s-under">undecidable</span></td></tr>
+          <tr><th scope="row">Progressive key<small>key shifts each cycle</small></th>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">1.8M alphabets, + 1 slip</span></td>
+            <td><span class="pill s-gap">not tested</span></td></tr>
+          <tr><th scope="row">Autokey<small>plaintext or ciphertext</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">all lags 1–96, forward and backward</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">exact; near-miss 10/24 vs shuffled 10–11/24</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">arbitrary mask + autokey, all lags</span></td></tr>
+          <tr><th scope="row">Chain addition<small>Gromark / Vimark, 2 terms</small></th>
+            <td colspan="4"><span class="pill s-closed">ruled out</span><span class="note">covered by the any-alphabet column: free alphabets include all of these</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">bases 3–26, primers ≤ 8 digits; 221k dictionary primers; none explains the width-21 rhythm</span></td></tr>
+          <tr><th scope="row">Chain addition<small>3 terms</small></th>
+            <td colspan="4"><span class="pill s-closed">ruled out</span><span class="note">covered by the any-alphabet column</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">2.27B primers, bases 3–26; 790k chance survivors, none explains the width-21 rhythm</span></td></tr>
+          <tr><th scope="row">Running text<small>English / German</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">scored vs shuffled</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">K4 −5.17 vs null −4.86…−5.21</span></td>
+            <td><span class="pill s-none">untestable</span></td></tr>
+          <tr><th scope="row">Specific texts<small>K1–K3, tableau, Morse</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">exact, all offsets</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">+ 10 books, Carter's Tut vol. 1, interview; 81M configs</span></td>
+            <td><span class="pill s-none">untestable</span></td></tr>
+          <tr><th scope="row">Digit key<small>Gronsfeld, clock, dates</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">π, e, √2, φ, coordinates, 1986/89</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">no alphabet gives digits ≤ 12</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">none &lt; 16</span></td>
+            <td><span class="pill s-none">untestable</span></td></tr>
+          <tr><th scope="row">Formula key<small>linear, polynomial</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">1,544 linear rules</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">linear and quadratic, 1.8M alphabets</span></td>
+            <td><span class="pill s-none">n/a</span></td></tr>
+          <tr><th scope="row">Interrupted keys<small>restart/pause on triggers</small></th>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">Quagmire IV, 116² pairs</span></td>
+            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">11,077 models × 842k</span></td>
+            <td><span class="pill s-under">undecidable</span></td></tr>
+          <tr><th scope="row">Clock / time streams<small>Berlin clock, zones, dates</small></th>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">Quagmire IV, 116² pairs</span></td>
+            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">1.35M streams × 8.4M vectors</span></td>
+            <td><span class="pill s-none">untestable</span></td></tr>
+          <tr><th scope="row">Chaocipher<small>self-modifying disks</small></th>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">116² pairs</span></td>
+            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-partial">partly</span><span class="note">clue × dictionary (10¹⁰ rows) and vs A–Z/KA closed; full dictionary × dictionary open</span></td>
+            <td><span class="pill s-none">untestable</span></td></tr>
+          <tr><th scope="row">Two stages<small>different tableaux</small></th>
+            <td><span class="pill s-closed">ruled out</span><span class="note">L1, L2 ≤ 26</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">L ≤ 10</span></td>
+            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-partial">partly</span><span class="note">L ≤ 12, at shuffled baseline</span></td>
+            <td><span class="pill s-under">undecidable</span></td></tr>
+          <tr><th scope="row">Keyword through a grid<small>block-constant, drift keys</small></th>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-closed">ruled out</span></td>
+            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">3,366 models × 1.8M alphabets; 148 fits vs 197 chance, all gibberish</span></td>
+            <td><span class="pill s-under">undecidable</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="ev-h">
+    <h2 id="ev-h">What the evidence pins down</h2>
+    <div class="two">
+      <div class="card">
+        <h3>Hard constraints</h3>
+        <ul class="ev">
+          <li><span class="k">Cribs</span><span>24 letters: EASTNORTHEAST at 22–34, BERLINCLOCK at 64–74. About 113 bits of evidence, enough to confirm any hand-cipher key.</span></li>
+          <li><span class="k">Sanborn</span><span>"One-to-one": each letter is encrypted in place. No reordering.</span></li>
+          <li><span class="k">42 apart</span><span>Positions 24 and 66 are both V (from T and L); 31 and 73 are both K (from A and K). No scheme may reuse one substitution 42 positions apart, so periods 7, 14, 21 and 42 are impossible for any alphabets.</span></li>
+          <li><span class="k">K→K</span><span>Position 74 encrypts to itself, which rules out ciphers that can't (Porta, Enigma-like).</span></li>
+          <li><span class="k">Scheidt</span><span>"More than one stage", "change the language base", "simple, can be remembered… with the correct key word/s".</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Statistical fingerprints</h3>
+        <ul class="ev">
+          <li><span class="k">Width 21</span><span>11 repeated vertical pairs: <span class="odds">1 in ~210</span> after correction. It's mostly the stacked doublets.</span></li>
+          <li><span class="k">Width 7</span><span>5 of 6 doublets in one column: <span class="odds">1 in 2,500</span> if 7 is pre-chosen (KRYPTOS), <span class="odds">1 in 4</span> if not.</span></li>
+          <li><span class="k">Doublets</span><span>Every visible column-5→6 step is a double: NO→QQ, ST→SS, IN→TT (plaintext gaps +1, +1, +5).</span></li>
+          <li><span class="k">Minor diffs</span><span>Bean's near-A–Z effect: <span class="odds">p = 0.14</span> using all 24 letters, so not significant.</span></li>
+          <li><span class="k">Ciphertext</span><span>IC 0.036, entropy 4.55 bits/letter (the random ceiling; K1/K2 4.35–4.39, K3 3.95).</span></li>
+          <li><span class="k">Implied key</span><span>Random-like linear complexity under 8.4M alphabet variants. A short memorable key would need a nonlinear expansion step.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="gap-h">
+    <div><h2 id="gap-h">Gaps, ranked</h2><p class="sub">Ranked by plausibility for a 1989 hand cipher and by the cost of testing.</p></div>
+    <ol class="gaps">
+      <li><div class="body"><h3>Sanborn-phrase alphabets × interrupted keys, clock streams, Chaocipher</h3><p>The 613k phrase alphabets are now closed for periodic, digit, running, linear and autokey structures. The three newest families were run with clue and dictionary alphabets only.</p></div><span class="cost">hours</span></li>
+      <li><div class="body"><h3>Chaocipher, full dictionary × dictionary</h3><p>About 10¹³ rows. A 1M random sample and the whole clue × dictionary block are at the shuffled baseline, and Byrne's rule was unpublished in 1989.</p></div><span class="cost">weeks; low prior</span></li>
+      <li><div class="body"><h3>Two stages with longer periods or three stages</h3><p>Two tableaux with L1, L2 ≤ 12 sit at baseline. Longer periods are mostly undecidable with 24 cribs, and three stages are out of reach.</p></div><span class="cost">days; mostly undecidable</span></li>
+      <li><div class="body"><h3>Unpublished material</h3><p>Strip-cipher sheets, arbitrary non-keyword alphabets, one-time key sheets. Nothing to search against.</p></div><span class="cost">blocked</span></li>
+      <li><div class="body"><h3>Undecidable cells</h3><p>Mask with key lengths 13, 16, 19, 20, 23, 24, 26; both alphabets free with long keys; mask + grid keys at widths above ~11. These need more known plaintext than 24 letters.</p></div><span class="cost">blocked</span></li>
+    </ol>
+  </section>
+
+  <footer>
+    Built from the session's test logs. Code, data and full results are in <span class="mono">~/Documents/code/kryptos-k4</span> (commits through the morning of 2026-10-18). Every tester was validated by recovering a planted solution before it was run on K4.
+  </footer>
+</div>
