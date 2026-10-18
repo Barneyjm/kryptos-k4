@@ -1,0 +1,34 @@
+corpus: 30 texts (fwd+rev); letters per direction:
+   g1342.txt                       579,289
+   g1661.txt                       446,808
+   g2701.txt                       970,451
+   g84.txt                         347,820
+   g98.txt                         600,124
+   de2229.txt                      166,098
+   de22367.txt                     116,293
+   de2407.txt                      103,847
+   de6498.txt                      173,981
+   de7205.txt                      432,457
+   sanborn_oral_history.txt        247,999
+   K1+K2end+K3                         768
+   panel.txt                           865
+   tableau.txt                         867
+   rkidx_carter.txt                284,914
+total letters (fwd+rev) 8,945,162; full 24-tuple offsets 8,942,972; distinct 13-grams 8,128,228; distinct 11-grams 7,458,420  [5s]
+alphabets: round3.ALPHA 116, rk_mixed 842,006, gap2 959,024
+K4: OBKRUOXOGHULBSOLIFBBWFLRVQQPRNGKSSOTWTQSJQSSEKZZWATJKLUDIAWINFBNYPVTTMZFPKWGDKZXTJCDIGKUHUAUEKCAR
+shuf1: RWWORIWTKPSSUOLUTGTHPBBAIDSUUQACHEDTTJLGKTNSFFRCBVRBLVPFZOXYKLZQJAGUEJFBSKZWOKQGKKWKDONMZIUNQISXA
+shuf2: CAGUFZKWJFQUAOTIWWOIINZXQMSPUDSPSOPKUKNFGVLKQQKZSOBBDUWTFDKUTSHRRBALRTIZSJGYGXVCNEBTKBALEWTKJLHOR
+
+== K4: configs 81,051,594  block1(13) hits 0  block2(11) hits 0  both-blocks 0  EXACT 24-crib running-key hits 0
+   distinct key tuples with a block hit: 0
+
+== shuf1: configs 81,051,594  block1(13) hits 0  block2(11) hits 0  both-blocks 0  EXACT 24-crib running-key hits 0
+   distinct key tuples with a block hit: 0
+
+== shuf2: configs 81,051,594  block1(13) hits 0  block2(11) hits 0  both-blocks 0  EXACT 24-crib running-key hits 0
+   distinct key tuples with a block hit: 0
+
+done in 22s
+expected chance hits per CT (uniform-key approx): block1 2.7e-04  block2 0.16  full 8.0e-20
+validation (rkidx_validate.out): plant1 KA/KA vig ind KA g98@123456 and plant2 PARISIANLY/s PA=A CA=KA beau ind A g98@345678 both recovered exactly (cribs_ok=True), 0 false block hits in 2x2.7M configs
