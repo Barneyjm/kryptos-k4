@@ -1,0 +1,57 @@
+=== Task A run Sun Oct 18 00:30:33 2026 ===
+planted pt: MOVEHIMSTRAIGHTBOTHMREASTNORTHEASTGEWERERATHERDISINCLINEDTOTHISBERLINCLOCKFAVOUROFONEOFTHEMREMAIN
+[planted dictF] plant1: rows 3,328  exact(24/24) 1  best partial 24/24 (#rows at best 1)  best EASTNORTHEAST-block 13/13  hist>=7: {10:1, 24:1}
+      top: (24, 13, 'std L=CHINAMAN/s R=KA rotR=9')
+      top: (10, 5, 'std L=CHINAMAN/s R=AZ rotR=2')
+      EXACT: ('std L=CHINAMAN/s R=KA rotR=9', 'MOVEHIMSTRAIGHTBOTHMREASTNORTHEASTGEWERERATHERDISINCLINEDTOTHISBERLINCLOCKFAVOUROFONEOFTHEMREMAIN')
+      planted recovered: True
+[planted clue] plant2: rows 699,712  exact(24/24) 1  best partial 24/24 (#rows at best 1)  best EASTNORTHEAST-block 13/13  hist>=7: {7:38, 8:6, 9:4, 10:1, 11:2, 12:1, 13:1, 16:1, 24:1}
+      top: (24, 13, 'swap L=kw:BERLIN R=kwrev:PALIMPSEST rotR=5')
+      top: (16, 9, 'swap L=kw:BERLINCLOCK R=kwrev:PALIMPSEST rotR=5')
+      top: (13, 9, 'swap L=kw:BERLINWALL R=kwrev:PALIMPSEST rotR=4')
+      EXACT: ('swap L=kw:BERLIN R=kwrev:PALIMPSEST rotR=5', 'MOVEHIMSTRAIGHTBOTHMREASTNORTHEASTGEWERERATHERDISINCLINEDTOTHISBERLINCLOCKFAVOUROFONEOFTHEMREMAIN')
+      planted recovered: True
+[clue] K4: rows 699,712  exact(24/24) 0  best partial 8/24 (#rows at best 2)  best EASTNORTHEAST-block 7/13  hist>=7: {7:16, 8:2}
+      top: (8, 7, 'swap L=kw:WEBSTER R=kwrev:LUCID rotR=8')
+      top: (8, 7, 'std L=kw:XLAYERTWO R=kw:URANIAWELTZEITUHR rotR=3')
+      (2s)
+[clue] shuf0: rows 699,712  exact(24/24) 0  best partial 8/24 (#rows at best 4)  best EASTNORTHEAST-block 6/13  hist>=7: {7:14, 8:4}
+      top: (8, 4, 'swap L=kwrev:XLAYERTWO R=kwrev:LAYERTWO rotR=25')
+      top: (8, 4, 'swap L=kwrev:LAYERTWO R=kwrev:LAYERTWO rotR=24')
+      top: (8, 4, 'std L=kwrev:URANIA R=kwrev:POSITION rotR=12')
+      (2s)
+[clue] shuf1: rows 699,712  exact(24/24) 0  best partial 8/24 (#rows at best 5)  best EASTNORTHEAST-block 6/13  hist>=7: {7:28, 8:5}
+      top: (8, 6, 'swap L=kwrev:MORSE R=kw:ILLUSION rotR=6')
+      top: (8, 5, 'swap L=kwrev:LUCID R=kw:NINETEENEIGHTYNINE rotR=18')
+      top: (8, 5, 'swap L=kwrev:DESPARATLY R=kw:VIRTUALLY rotR=9')
+      (2s)
+[dictF] K4: rows 350,294,464  exact(24/24) 0  best partial 9/24 (#rows at best 40)  best EASTNORTHEAST-block 8/13  hist>=7: {7:7015, 8:528, 9:40}
+      top: (9, 8, 'swap L=AZrev R=DINGMAUL/s rotR=18')
+      top: (9, 7, 'swap L=KArev R=PHOTODROMY/t-rev rotR=3')
+      top: (9, 7, 'swap L=AZrev R=ILLAUDABLY/s rotR=18')
+      (895s)
+[dictF] shuf0: rows 350,294,464  exact(24/24) 0  best partial 10/24 (#rows at best 3)  best EASTNORTHEAST-block 7/13  hist>=7: {7:6594, 8:569, 9:35, 10:3}
+      top: (10, 7, 'swap L=KArev R=PARANOID/s-rev rotR=2')
+      top: (10, 5, 'std L=ORPIMENT/t R=AZ rotR=21')
+      top: (10, 4, 'std L=SUPERCORDIAL/t R=AZrev rotR=6')
+      (894s)
+[dictF] shuf1: rows 350,294,464  exact(24/24) 0  best partial 10/24 (#rows at best 1)  best EASTNORTHEAST-block 7/13  hist>=7: {7:5693, 8:404, 9:31, 10:1}
+      top: (10, 5, 'swap L=INFUMATION/t R=KArev rotR=4')
+      top: (9, 7, 'swap L=KArev R=STIMULATE/s-rev rotR=10')
+      top: (9, 7, 'swap L=KA R=CARBOMETHOXY/s-rev rotR=2')
+      (896s)
+[dd] K4: rows 52,000,000  exact(24/24) 0  best partial 9/24 (#rows at best 9)  best EASTNORTHEAST-block 7/13  hist>=7: {7:1162, 8:113, 9:9}
+      top: (9, 7, 'swap L=AONIAN/s-rev R=DUNNESS/t rotR=4')
+      top: (9, 5, 'swap L=STOMATOMALACIA/s R=DENTICAL/s-rev rotR=4')
+      top: (9, 5, 'swap L=OVERGLANCE/t R=INSCRIPTURED/t rotR=17')
+      (135s)
+[dd] shuf0: rows 52,000,000  exact(24/24) 0  best partial 10/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:1131, 8:73, 9:12, 10:1}
+      top: (10, 7, 'swap L=RENEWEDLY/t R=UNFLOORED/s-rev rotR=10')
+      top: (9, 6, 'swap L=CIRRIFEROUS/t-rev R=PSEUDOCENTRUM/t-rev rotR=12')
+      top: (9, 6, 'std L=UPDRAFT/s R=BROTH/t rotR=5')
+      (135s)
+[dd] shuf1: rows 52,000,000  exact(24/24) 0  best partial 9/24 (#rows at best 6)  best EASTNORTHEAST-block 7/13  hist>=7: {7:1236, 8:94, 9:6}
+      top: (9, 7, 'std L=SPHACELATED/t-rev R=CANZONET/s rotR=3')
+      top: (9, 5, 'std L=ISCARIOTICAL/s-rev R=UNSMARTNESS/s-rev rotR=3')
+      top: (9, 4, 'swap L=YEARNLING/s R=GOUGE/t-rev rotR=20')
+      (135s)

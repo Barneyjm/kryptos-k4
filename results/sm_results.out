@@ -1,0 +1,57 @@
+=== sm_ results: Task A (Chaocipher) and Task B (clock-derived key streams), 2026-10-18 ===
+Scripts: sm_chao.py (cipher + self-test), sm_taskA.py, sm_taskB.py. Raw logs: sm_taskA.out, sm_taskB.out.
+Shuffles: rng = np.random.default_rng(0); shuf0, shuf1 = two successive rng.permutation(list(CT)).
+
+TASK A: CHAOCIPHER
+Implementation check: Rubin/Wikipedia test vector, L=HXUCZVAMDSLKPEFJRIGTWOBNYQ, R=PTLNBQDEOYSFAVZKGJRIHWXUMC,
+  WELLDONEISBETTERTHANWELLSAID -> OAHQHCNYNXTSZJRRHJBYHQKSOUJY: enc OK, dec OK. Vectorized == reference on 400 random round trips.
+Rotations: only the RELATIVE rotation of the two disks matters (verified: 676 rotation pairs give 26 distinct K4 decryptions),
+  so 26 offsets per (L,R) pair cover all 26x26 starting rotations.
+Directions: std (ct read from the left disk) and swap (ct read from the right disk, i.e. P = Chao-encrypt(C)).
+Planted tests: plant1 (L=dict CHINAMAN/s, R=KA rot 9, std) recovered exactly, 1 row 24/24;
+               plant2 (L=kw:BERLIN, R=kwrev:PALIMPSEST rot 5, swap) recovered exactly, 1 row 24/24 out of 699,712.
+  [clue] K4: rows 699,712  exact(24/24) 0  best partial 8/24 (#rows at best 2)  best EASTNORTHEAST-block 7/13  hist>=7: {7:16, 8:2}
+  [clue] shuf0: rows 699,712  exact(24/24) 0  best partial 8/24 (#rows at best 4)  best EASTNORTHEAST-block 6/13  hist>=7: {7:14, 8:4}
+  [clue] shuf1: rows 699,712  exact(24/24) 0  best partial 8/24 (#rows at best 5)  best EASTNORTHEAST-block 6/13  hist>=7: {7:28, 8:5}
+  [dictF] K4: rows 350,294,464  exact(24/24) 0  best partial 9/24 (#rows at best 40)  best EASTNORTHEAST-block 8/13  hist>=7: {7:7015, 8:528, 9:40}
+  [dictF] shuf0: rows 350,294,464  exact(24/24) 0  best partial 10/24 (#rows at best 3)  best EASTNORTHEAST-block 7/13  hist>=7: {7:6594, 8:569, 9:35, 10:3}
+  [dictF] shuf1: rows 350,294,464  exact(24/24) 0  best partial 10/24 (#rows at best 1)  best EASTNORTHEAST-block 7/13  hist>=7: {7:5693, 8:404, 9:31, 10:1}
+  [dd] K4: rows 52,000,000  exact(24/24) 0  best partial 9/24 (#rows at best 9)  best EASTNORTHEAST-block 7/13  hist>=7: {7:1162, 8:113, 9:9}
+  [dd] shuf0: rows 52,000,000  exact(24/24) 0  best partial 10/24 (#rows at best 1)  best EASTNORTHEAST-block 8/13  hist>=7: {7:1131, 8:73, 9:12, 10:1}
+  [dd] shuf1: rows 52,000,000  exact(24/24) 0  best partial 9/24 (#rows at best 6)  best EASTNORTHEAST-block 7/13  hist>=7: {7:1236, 8:94, 9:6}
+  clue  = 116 clue alphabets (AZ, KA, reversed, keyword-mixed clue words and their reverses) on both disks, all pairs.
+  dictF = all 842,054 dictionary+clue alphabets on one disk x {AZ, KA, AZrev, KArev} on the other, both sides.
+  dd    = 1,000,000 random dictionary x dictionary pairs (rng 5).
+  Each = rows x 26 relative offsets x 2 directions, full decryption to position 73, all 24 cribs scored.
+  Result: 0 exact fits anywhere. K4's best partial matches (8, 9, 9) fall inside or below the shuffled range (8/8, 10/10, 10/9).
+  Not covered: clue x dictionary (about 10^10 rows) and arbitrary non-keyword alphabets.
+
+TASK B: CLOCK-DERIVED ADDITIVE KEY STREAMS
+Model: idx_C(C_i) = sigma*s_i + b +/- idx_P(P_i) mod 26 (vig/beau), sigma=+/-1, b=0..25 (Gronsfeld when s is digits).
+Streams: 1,349,014 (391,552 distinct crib patterns), each the first 97 values:
+  Berlin clock (Mengenlehreuhr) per time step: lit, unlit, each row, r1+r2, r3+r4, red, yellow, base-5 value, h, m, minute-of-day,
+    h+m, HHMM number, 12h hour, digit sum; interleaved readings (rows top-down/bottom-up, (h,m), (m,h), HHMM/HHMM12/MMHH/HMM digits)
+    at every phase; lamp on/off bits (24 lamps incl. seconds, top-down and bottom-up, every phase).
+    Every start minute 00:00-23:59, steps +/-1, 5, 15, 30, 60 min.
+  Time zones: -12..12, -12..11, -11..12, signed and |z|, every start, step +/-1, +/-2, 5, 7, 11.
+  K2 coordinates/dates: digit cycles (38576577844, lat, lon, no-decimal, 1986, 1989, 1990, 9 Nov 1989 and 3 Nov 1990 in several
+    formats, concatenations), forward and reversed, every phase; number cycles (38,57,6,5,77,8,44 ...; years; day/month/year).
+Alphabets: 842,054 dictionary+clue alphabets as Q3 (same both sides), Q1/Q2 with AZ and KA partners, vig+beau
+  (8,421,080 key vectors), plus Q4 over the 116x116 clue pairs (26,912) -> 8,447,452 implied-key vectors per ciphertext.
+  Exact matching uses a hash of offset-normalized crib keys, so every stream x sign x offset is checked.
+  [planted] stream=bc:lit start=13:37 step=5 alph=CHINAMAN/s Q3vig sigma=1 b=3: 10 hits, planted plaintext recovered: True  e.g. [('Q3vig', 'CHINAMAN/s', 'bc:lit start=03:35 step=5', 1, 7, 5)]
+  [planted] stream=bc:HHMM start=07:15 step=15 phase=2 alph=KRYPTOS/t-rev Q1KAbeau sigma=-1 b=11: 6 hits, planted plaintext recovered: True  e.g. [('Q1KAvig', 'KRYPTOS/t', 'bc:HHMM start=07:15 step=15 phase=2', -1, 12, 3)]
+  [planted] stream=tz:-12..12 start=5 dir=-1 alph=kw:PALIMPSEST Q2AZvig sigma=1 b=0: 12 hits, planted plaintext recovered: True  e.g. [('Q2AZvig', 'PALIMPSEST/s', 'tz:-12..12 start=5 dir=-1', 1, 0, 2)]
+  [exact] K4: key vectors tested 8,447,452 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0  (5s)
+  [partial] K4 Q3vig over 116 clue alphabets x 1,349,014 streams: best 10/24 (kw:COMPASS, sigma=1, bc:rows_bu start=07:52 step=-15 phase=2)
+  [partial] K4 Q3beau over 116 clue alphabets x 1,349,014 streams: best 10/24 (kwrev:ILLUSION, sigma=1, bc:rows_bu start=16:17 step=1 phase=2)
+  [exact] shuf0: key vectors tested 8,447,452 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0  (5s)
+  [partial] shuf0 Q3vig over 116 clue alphabets x 1,349,014 streams: best 10/24 (kw:INTERPRETATIU, sigma=1, bc:rows_bu start=06:52 step=30 phase=1)
+  [partial] shuf0 Q3beau over 116 clue alphabets x 1,349,014 streams: best 10/24 (kwrev:POSITION, sigma=1, bc:MMHH start=01:19 step=-15 phase=2)
+  [exact] shuf1: key vectors tested 8,447,452 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0  (5s)
+  [partial] shuf1 Q3vig over 116 clue alphabets x 1,349,014 streams: best 9/24 (kw:PALIMPSEST, sigma=1, bc:rows_bu start=08:17 step=15 phase=1)
+  [partial] shuf1 Q3beau over 116 clue alphabets x 1,349,014 streams: best 10/24 (KA, sigma=1, bc:MMHH start=07:32 step=5 phase=3)
+  Result: 0 exact fits on K4 (0 and 0 on the shuffles). Best partial (116 clue alphabets, Q3, best sigma/b): K4 10/10 vs shuffled 10/10 and 9/10,
+  which is chance.
+
+CONCLUSION: no Chaocipher or clock-stream configuration reproduces the 24 cribs. No candidate plaintext.

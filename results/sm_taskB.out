@@ -1,0 +1,14 @@
+=== Task B run Sun Oct 18 01:23:16 2026  streams 1,349,014, patterns 526,975 ===
+[planted] stream=bc:lit start=13:37 step=5 alph=CHINAMAN/s Q3vig sigma=1 b=3: 10 hits, planted plaintext recovered: True  e.g. [('Q3vig', 'CHINAMAN/s', 'bc:lit start=03:35 step=5', 1, 7, 5)]
+[planted] stream=bc:HHMM start=07:15 step=15 phase=2 alph=KRYPTOS/t-rev Q1KAbeau sigma=-1 b=11: 6 hits, planted plaintext recovered: True  e.g. [('Q1KAvig', 'KRYPTOS/t', 'bc:HHMM start=07:15 step=15 phase=2', -1, 12, 3)]
+[planted] stream=tz:-12..12 start=5 dir=-1 alph=kw:PALIMPSEST Q2AZvig sigma=1 b=0: 12 hits, planted plaintext recovered: True  e.g. [('Q2AZvig', 'PALIMPSEST/s', 'tz:-12..12 start=5 dir=-1', 1, 0, 2)]
+[exact] K4: key vectors tested 8,447,452 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0  (5s)
+[partial] K4 Q3vig over 116 clue alphabets x 1,349,014 streams: best 10/24 (kw:COMPASS, sigma=1, bc:rows_bu start=07:52 step=-15 phase=2)
+[partial] K4 Q3beau over 116 clue alphabets x 1,349,014 streams: best 10/24 (kwrev:ILLUSION, sigma=1, bc:rows_bu start=16:17 step=1 phase=2)
+[exact] shuf0: key vectors tested 8,447,452 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0  (5s)
+[partial] shuf0 Q3vig over 116 clue alphabets x 1,349,014 streams: best 10/24 (kw:INTERPRETATIU, sigma=1, bc:rows_bu start=06:52 step=30 phase=1)
+[partial] shuf0 Q3beau over 116 clue alphabets x 1,349,014 streams: best 10/24 (kwrev:POSITION, sigma=1, bc:MMHH start=01:19 step=-15 phase=2)
+[exact] shuf1: key vectors tested 8,447,452 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0  (5s)
+[partial] shuf1 Q3vig over 116 clue alphabets x 1,349,014 streams: best 9/24 (kw:PALIMPSEST, sigma=1, bc:rows_bu start=08:17 step=15 phase=1)
+[partial] shuf1 Q3beau over 116 clue alphabets x 1,349,014 streams: best 10/24 (KA, sigma=1, bc:MMHH start=07:32 step=5 phase=3)
+done 213s
