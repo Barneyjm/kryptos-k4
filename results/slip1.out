@@ -1,0 +1,3 @@
+model x dropped-crib variants: 866
+planted periodic L=9 with slip at crib 6 -> ['periodic L=9 slip@27', 'periodic L=9 slip@72']
+K4 one-slip: 0 hits over 1,801,032 alphabets (5424s)
