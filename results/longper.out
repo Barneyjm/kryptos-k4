@@ -1,0 +1,22 @@
+quagmire hits 0 []
+autokey hits [('ctak', 'kw:XLAYERTWO', 'beau', 73), ('ctak', 'kw:ILLUSION', 'beau', 73), ('ctak', 'kw:MEMORY', 'beau', 73), ('ctak', 'kwrev:EASTNORTHEAST', 'beau', 73), ('ctak', 'kwrev:LAYERTWO', 'beau', 73), ('ctak', 'kwrev:IDBYROWS', 'beau', 73), ('ctak', 'kwrev:HOUR', 'beau', 73)]
+progressive hits []
+hill hits []
+checks per model: [('periodic L=17', 7), ('periodic L=18', 7), ('periodic L=23', 7), ('periodic L=24', 5)]
+L=17,18,23,24 exact over 1,801,148 alphabets: 0 hits (23s)
+L=26 AZ|AZ vig: cribs inconsistent
+L=26 AZ|AZ beau: cribs inconsistent
+L=26 AZ|KA vig: cribs inconsistent
+L=26 AZ|KA beau: cribs inconsistent
+L=26 KA|AZ vig: cribs inconsistent
+L=26 KA|AZ beau: cribs inconsistent
+L=26 KA|KA vig: cribs inconsistent
+L=26 KA|KA beau: cribs inconsistent
+L=25 AZ|AZ vig: cribs inconsistent
+L=25 AZ|AZ beau: cribs inconsistent
+L=25 AZ|KA vig: cribs inconsistent
+L=25 AZ|KA beau: cribs inconsistent
+L=25 KA|AZ vig: cribs inconsistent
+L=25 KA|AZ beau: cribs inconsistent
+L=25 KA|KA vig: cribs inconsistent
+L=25 KA|KA beau: cribs inconsistent

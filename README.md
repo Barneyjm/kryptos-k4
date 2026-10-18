@@ -56,6 +56,23 @@ Sanborn has described BERLINCLOCK as a direct, position-by-position match with N
 - A masking step applied to the plaintext before substitution (Scheidt: "change the language base", "more than one stage").
 - The 7-rhythm combined with Sanborn's statement that the cipher is "one-to-one" (no transposition).
 
+## Session 2 (night of 2026-10-17): gap-filling
+
+All exact unless noted; every tester validated on a planted solution first. Scripts in `scripts/`, logs in `results/`.
+
+- **Correction.** Earlier periodic-key tests only reported fits with >= 8 independent checks, which silently excluded key lengths 17, 18, 23-26. Re-tested (`longper.py`): lengths 17, 18, 23, 24 give 0 fits across 1.8M alphabets; 25 and 26 are inconsistent with the cribs for every standard alphabet pairing.
+- Linear key models (repeating 1-26, progressive, grid keys W=2-30 all offsets, two combined keys, linear/quadratic formulas; 288 models with >= 8 checks) x 842,006 dictionary-keyword alphabets x 10 arrangements x vig/beau (`cokernel.py`, `gap1.py`): 0 fits; two shuffled baselines also 0.
+- The same models x 959,024 further alphabets (decimated A-Z/KA, keyword + reversed remainder, keyword + continue-from-last, 19,535 German words in four constructions) (`gap2.py`): 0.
+- Autokey (plaintext and ciphertext, lags 1-96, key value read in plain/cipher/A-Z/KRYPTOS alphabets) x dictionary alphabets (`autokey_dict.py`): 0 exact. Near-miss version (`autokey_near.py`, 707M configurations): K4's best is 10/24; shuffled ciphertext reaches 10-11/24. No signal.
+- M-94 wheel cipher (25 published disks, all disk orders via bipartite matching, all line offsets, all alignments) (`m94.py`): 0.
+- Arbitrary monoalphabetic mask + autokey, either side, all lags (`mask_autokey.py`): 0.
+- Three-term chain addition, bases 3-26, primers <= 8 digits, both alphabets free (`chain3.py`, 2.27B primers): 790,052 chance survivors; the best explains 3 of the 11 width-21 repeats (chance level).
+- Physical layout as key source: tableau letter at the same row/column (plain and mirrored, row shifts +-3, column shifts +-6) (`overlay.py`); letter 1-27 rows above/below in the same column on either half (`verticals.py`, 4,368 configurations): 0 exact, best 5/24 (chance). Skip-codes (every k-th letter) through the combined panels: at noise level.
+- Keys derived from K1-K3 by rule (initials, finals, letters after X, word lengths, every n-th letter; 90 strings) as running/periodic keys and as keyword alphabets (`derived.py`): 0.
+- Two-stage polyalphabetic with different tableaux (nonlinear composition; solved by connected components) (`twostage.py`): std/KA alphabets in all roles, L1,L2 <= 26: 0 significant; clue-word alphabets as two different tableaux, L1,L2 <= 10 (5.3M configurations): 0. Shuffled baseline 0.
+- Information theory (`bm.py`, `bm_dict.py`): K4's ciphertext entropy (4.55 bits/letter in 97-letter windows) is at the random ceiling, above K1/K2 (4.35-4.39, consistent with short repeating keys) and K3 (3.95, English). The implied key runs have random-like linear complexity (Berlekamp-Massey mod 2 and mod 13) under all 8.42M alphabet/type variants; no single linear recurrence generates both runs. If a short memorable key produced K4, the expansion step is nonlinear.
+- Paradigm CTF puzzles (`ctf_puzzles.json`, `solve_*.py`): PK1 = KRYPTOS-alphabet Vigenère, key PROVENANCE; PK2 = columnar transposition width 7; PK3 = KRYPTOS-alphabet Vigenère with a 40-letter random key. All ten were already solved by others (prizes claimed June-Oct 2026).
+
 ## Running
 The scripts live in `scripts/` and expect `panel.txt`, `split.txt`, `tableau.txt` and the corpora in the working directory. Run `scripts/fetch_corpora.sh` once to download the Project Gutenberg texts used for the n-gram scores. Most scripts use numpy and multiprocessing; the Hill tests need sympy, and the digit streams need mpmath.
 
