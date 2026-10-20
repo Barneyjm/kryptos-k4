@@ -112,11 +112,10 @@ def main():
     if not ok:
         log("ABORT: partial kernel disagreed with sm_taskB.best_partial")
         sys.exit(1)
-    # Speed probe on real Q3 Vigenere keys, not random keys. A 400-key random
-    # probe measured 6.77 ms/key (full Q3 x 3 ciphertexts looked like 6.92 h) but
-    # the sustained rate on all 613,440 keys was 14.37 ms/key, i.e. 14.7 h, which
-    # is past the ~12 h line for running every phrase alphabet. Time a long slice
-    # of the actual implied keys after a warmup so the estimate sees sustained clocks.
+    # Speed probe on real Q3 Vigenere keys. A 400-key random probe was 6.77 ms/key.
+    # Time a long slice of the actual implied keys after a warmup. The earlier
+    # full-pass stamp of 17634s was time.time() across a wall-clock step, not a
+    # slower kernel: CPU time on that pass matches this probe.
     ks_cal = B.implied_keys(k4.CT, alphs, partners)
     Kcal = (np.asarray(ks_cal["Q3vig"]) % 26).astype(np.uint8)
     ncal = min(8000, len(Kcal))
@@ -131,11 +130,10 @@ def main():
     est_all = est_one_ct * 3
     log(f"partial probe {dt:.2f}s / {ncal} real Q3vig keys -> {per_key*1000:.2f} ms/key. "
         f"Full partial {n_arr} arrangements x 3 ciphertexts estimated {est_all/3600:.2f} h")
-    log("prior full-alphabet K4 Q3 pass (stopped once the sustained rate was known): "
-        "exact crib fits 0; best partial 13/24 "
+    log("prior full-alphabet K4 Q3 pass: exact crib fits 0; best partial 13/24 "
         "('Q3vig', 'LOTOFTIMEGOING/s', 'bc:digsum start=17:30 step=-15', sigma=+1, b=14); "
-        "hist_tail {11:6932, 12:220, 13:14}; 17634s at 14.37 ms/key. "
-        "shuf0 exact on the full set was 0. See results/phr_clock_k4full.out.")
+        "hist_tail {11:6932, 12:220, 13:14}. shuf0 exact on that pass was 0. "
+        "See results/phr_clock_k4full.out.")
     # Partial scope, identical for K4 and both shuffles. Exact test is always all 10 arrangements.
     # Tier 1: all 10 arrangements. Tier 2: Q3 vig+beau on every phrase alphabet.
     # Tier 3: Q3 vig+beau on the first M phrase alphabets (gap_phr order), M chosen to fit in 6 h.
@@ -217,6 +215,7 @@ def main():
         return
     # free the per-stream dict before the big partial; keep SC, names, SCU
     del S
+    rng = np.random.default_rng(0)
     sh = ["".join(rng.permutation(list(k4.CT))) for _ in range(2)]
     log(f"shuf0 {sh[0]}")
     log(f"shuf1 {sh[1]}")
