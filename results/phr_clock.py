@@ -112,21 +112,35 @@ def main():
     if not ok:
         log("ABORT: partial kernel disagreed with sm_taskB.best_partial")
         sys.exit(1)
-    # ---- speed probe: 400 alphabets worth of one key matrix, all unique patterns, both signs ----
-    rng = np.random.default_rng(0)
-    probe = rng.integers(0, 26, size=(400, 24), dtype=np.uint8)
+    # Speed probe on real Q3 Vigenere keys, not random keys. A 400-key random
+    # probe measured 6.77 ms/key (full Q3 x 3 ciphertexts looked like 6.92 h) but
+    # the sustained rate on all 613,440 keys was 14.37 ms/key, i.e. 14.7 h, which
+    # is past the ~12 h line for running every phrase alphabet. Time a long slice
+    # of the actual implied keys after a warmup so the estimate sees sustained clocks.
+    ks_cal = B.implied_keys(k4.CT, alphs, partners)
+    Kcal = (np.asarray(ks_cal["Q3vig"]) % 26).astype(np.uint8)
+    ncal = min(8000, len(Kcal))
+    partial(lib, Kcal[:200], SCU)
     t1 = time.time()
-    partial(lib, probe, SCU)
+    partial(lib, Kcal[:ncal], SCU)
     dt = time.time() - t1
-    per_key = dt / 400.0
+    per_key = dt / ncal
+    del ks_cal, Kcal
     n_arr = 10  # Q3, Q1AZ, Q1KA, Q2AZ, Q2KA x vig/beau
     est_one_ct = per_key * len(names) * n_arr
     est_all = est_one_ct * 3
-    log(f"partial probe {dt:.2f}s / 400 keys -> {per_key*1000:.2f} ms/key. "
+    log(f"partial probe {dt:.2f}s / {ncal} real Q3vig keys -> {per_key*1000:.2f} ms/key. "
         f"Full partial {n_arr} arrangements x 3 ciphertexts estimated {est_all/3600:.2f} h")
+    log("prior full-alphabet K4 Q3 pass (stopped once the sustained rate was known): "
+        "exact crib fits 0; best partial 13/24 "
+        "('Q3vig', 'LOTOFTIMEGOING/s', 'bc:digsum start=17:30 step=-15', sigma=+1, b=14); "
+        "hist_tail {11:6932, 12:220, 13:14}; 17634s at 14.37 ms/key. "
+        "shuf0 exact on the full set was 0. See results/phr_clock_k4full.out.")
     # Partial scope, identical for K4 and both shuffles. Exact test is always all 10 arrangements.
-    # Tier 1: all 10 arrangements. Tier 2: Q3 vig+beau only (the Session 2 partial).
+    # Tier 1: all 10 arrangements. Tier 2: Q3 vig+beau on every phrase alphabet.
     # Tier 3: Q3 vig+beau on the first M phrase alphabets (gap_phr order), M chosen to fit in 6 h.
+    # Tier 2 only if the measured Q3 x 3 ciphertext estimate is within 8 h. Above that
+    # (the ~12 h case) a prefix is the run, and the unscored tail is estimated.
     partial_M = len(names)
     if est_all <= BUDGET_S:
         partial_labels = ["Q3vig", "Q3beau", "Q1AZvig", "Q1AZbeau", "Q1KAvig", "Q1KAbeau",
@@ -134,9 +148,6 @@ def main():
         log("Running partial on all 10 arrangements, all phrase alphabets.")
     else:
         est_q3 = per_key * len(names) * 2 * 3
-        # All 10 arrangements are the full partial. Q3 vig+beau is the Session 2 partial
-        # (same alphabet on both sides). Keep every phrase alphabet in that partial whenever
-        # the estimate is within about 7 h: a prefix could hide the best score.
         if est_q3 <= 8 * 3600:
             partial_labels = ["Q3vig", "Q3beau"]
             log(f"SUBSET: full partial estimate {est_all/3600:.2f} h exceeds 6 h. "
@@ -145,11 +156,21 @@ def main():
         else:
             partial_labels = ["Q3vig", "Q3beau"]
             partial_M = max(1, int(BUDGET_S / (per_key * 2 * 3)))
+            partial_M = min(partial_M, len(names))
             est_m = per_key * partial_M * 2 * 3
-            log(f"SUBSET: even Q3 partial on every phrase alphabet estimates {est_q3/3600:.2f} h. "
-                f"Partial is Q3 vig and Q3 beau on the first {partial_M:,} phrase alphabets "
-                f"(gap_phr order), estimate {est_m/3600:.2f} h. Exact test still covers all 10 arrangements "
-                f"and every phrase alphabet.")
+            rest = len(names) - partial_M
+            rest_h = per_key * rest * 2 * 3 / 3600.0
+            other_h = per_key * len(names) * 8 * 3 / 3600.0
+            log(f"SUBSET: Q3 partial on every phrase alphabet estimates {est_q3/3600:.2f} h, "
+                f"past the ~12 h line. Partial is Q3 vig and Q3 beau on the first {partial_M:,} "
+                f"phrase alphabets (gap_phr order), estimate {est_m/3600:.2f} h, same prefix for "
+                f"K4 and both shuffles. Exact test still covers all 10 arrangements and every phrase alphabet.")
+            log(f"estimate of the rest: remaining {rest:,} phrase alphabets x Q3 vig+beau x 3 ciphertexts "
+                f"= {rest_h:.2f} h; the other 8 arrangements x every phrase alphabet x 3 ciphertexts "
+                f"= {other_h:.2f} h. Neither is run.")
+    hit_i = name_index.get("LOTOFTIMEGOING/s")
+    log(f"full-K4 best alphabet LOTOFTIMEGOING/s index={hit_i} "
+        f"({'inside' if hit_i is not None and hit_i < partial_M else 'outside'} the scored prefix of {partial_M:,})")
     # ---- planted exact recovery (phrase alphabet + a real stream) ----
     prng = np.random.default_rng(7)
     pt = fc.planted_plaintext(prng)
@@ -240,7 +261,8 @@ def main():
     log(f"SUMMARY family=clock combinations={len(names)}x{len(snames)}x10x2x26 "
         f"exact_k4={k4s[1]} exact_s0={s0[1]} exact_s1={s1[1]} "
         f"partial_k4={k4s[2]}/24 partial_s0={s0[2]}/24 partial_s1={s1[2]}/24 "
-        f"partial_arr={','.join(partial_labels)} "
+        f"partial_arr={','.join(partial_labels)} partial_M={partial_M} "
+        f"k4_full_q3_partial=13/24 "
         f"planted=pass runtime_s={elapsed:.0f} coverage_exact={cov_exact:.4f} coverage_partial={cov_partial:.4f}")
     log(f"done {time.ctime()}")
 

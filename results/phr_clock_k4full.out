@@ -1,0 +1,14 @@
+phrase alphabets 613,440 sha256/16=46412e317b7a1253
+streams 1,349,014 distinct crib patterns 391,552 (18s)
+distinct normalized crib-key patterns (with sign): 526,975
+partial self-check: True (forced 24/23=24/23 Cbest=24 pybest=24 hist_match=True taskB=24)
+partial probe 2.71s / 400 keys -> 6.77 ms/key. Full partial 10 arrangements x 3 ciphertexts estimated 34.61 h
+SUBSET: full partial estimate 34.61 h exceeds 6 h. Partial is Q3 vig and Q3 beau only (2/10 arrangements), all 613,440 phrase alphabets, estimate 6.92 h. Exact test still covers all 10 arrangements.
+[planted] stream=bc:lit start=13:37 step=5 alph=BERLINCLOCK/s Q3vig sigma=1 b=3: alphabet hit=True plaintext recovered=True
+[planted] stream=bc:HHMM start=07:15 step=15 phase=2 alph=EASTNORTHEAST/s Q1KAbeau sigma=-1 b=11: alphabet hit=True plaintext recovered=True
+[planted] stream=tz:-12..12 start=5 dir=-1 alph=CLOCK/s Q2AZvig sigma=1 b=0: alphabet hit=True plaintext recovered=True
+shuf0 LPXGIFZKWOHMLWDSQYLGTTITPKBKQAVRQKXWONZNUGUSTUSWDUCZTNDBPSJJKUCIVFRGKQOEBURFTKOLSOKHASZBWJFAAIEBR
+shuf1 SUFFQZINAGHOPSBVOWINKAPTKGLXGEKMNLQJEZTXBRTLFRDKKSWCTFOWDORBULTIZSJIDQKZYUJAAUTPBRGHUKWKWSCUQBOSV
+[exact] K4: key vectors 6,134,400 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0 (7s)
+[partial] K4: arrangements ['Q3vig', 'Q3beau']: best 13/24 ('Q3vig', 'LOTOFTIMEGOING/s', 'bc:digsum start=17:30 step=-15', 1, 14, 13) hist_tail {11:6932, 12:220, 13:14} (17634s)
+[exact] shuf0: key vectors 6,134,400 x 1,349,014 streams x 2 signs x 26 offsets: exact crib fits 0 (9s)
