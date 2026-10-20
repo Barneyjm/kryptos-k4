@@ -104,6 +104,7 @@ def main():
     log(f"distinct normalized crib-key patterns (with sign): {len(table):,}")
     alphs = list(zip(pc.strings(A), names))
     name_index = {n: i for i, n in enumerate(names)}
+    dX = {n: a for a, n in alphs}
     partners = {"AZ": k4.AZ, "KA": k4.KA}
     # ---- kernel vs Python / sm_taskB.best_partial ----
     ok, msg = self_check(lib, SCU)
@@ -157,7 +158,6 @@ def main():
     plants = [("bc:lit start=13:37 step=5", have("BERLINCLOCK/s") or names[0], "Q3", 1, 3, "vig"),
               ("bc:HHMM start=07:15 step=15 phase=2", have("EASTNORTHEAST/s") or names[1], "Q1KA", -1, 11, "beau"),
               ("tz:-12..12 start=5 dir=-1", have("CLOCK/s") or names[2], "Q2AZ", 1, 0, "vig")]
-    dX = dict(alphs)
     plant_ok = True
     for sname, an, arr, sg, b, mode in plants:
         X = dX[an]
