@@ -108,9 +108,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 <div class="wrap">
   <header>
-    <div class="eyebrow">Kryptos K4 · session map · 2026-10-17 → 18 (overnight update)</div>
+    <div class="eyebrow">Kryptos K4 · session map · 2026-10-17 → 21</div>
     <h1>What we tried on K4, and where the holes are</h1>
-    <p class="lede">Updated after the overnight gap-filling run: every red cell from the first version was tested, and all came back negative. K4 seen as an encryption pipeline. Each step can be built several ways, and every way we tested is marked with its status. The matrix below crosses key structure with alphabet type. Its empty cells are the gaps.</p>
+    <p class="lede">Updated 2026-10-21. The 613,440 Sanborn-phrase alphabets were run against interrupted keys, clock streams, and Chaocipher, the three families named in the previous top gap. All three sit at the shuffled baseline. K4 is not solved. The matrix below crosses key structure with alphabet type. Its red cells are the gaps.</p>
     <div class="ct" aria-label="K4 ciphertext with the 24 known plaintext positions highlighted">OBKRUOXOGHULBSOLIFBBW<b>FLRVQQPRNGKSS</b>OTWTQSJQSSEKZZWATJKLUDIAWINFB<b>NYPVTTMZFPK</b>WGDKZXTJCDIGKUHUAUEKCAR</div>
     <div class="legend">
       <span class="pill s-closed">ruled out</span>
@@ -137,7 +137,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         <div class="node s-closed"><span class="n">A–Z, KRYPTOS</span><span class="d">every family</span></div>
         <div class="node s-closed"><span class="n">Clue-word keyed</span><span class="d">~138 English and German words, 13k pairs</span></div>
         <div class="node s-closed"><span class="n">Dictionary keyed</span><span class="d">842k alphabets × every linear key model, autokey, interrupted keys, running text, Chaocipher, two-stage</span></div>
-        <div class="node s-closed"><span class="n">Sanborn-phrase keyed</span><span class="d">613k alphabets: periodic, digit, running keys, all linear models, autokey</span></div>
+        <div class="node s-closed"><span class="n">Sanborn-phrase keyed</span><span class="d">613k alphabets: periodic, digit, running, linear, autokey, interrupted keys, clock streams; Chaocipher vs clue disks</span></div>
         <div class="node s-closed"><span class="n">Hand-modified A–Z/KA</span><span class="d">1,850 moved or swapped letters</span></div>
         <div class="node s-closed"><span class="n">Other constructions</span><span class="d">959k alphabets: decimated, reversed remainder, continue-from-last, 19.5k German words</span></div>
       </div>
@@ -149,9 +149,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
         <div class="node s-closed"><span class="n">Chain addition, 3 terms</span><span class="d">2.27B primers, bases 3–26, free alphabets: chance level</span></div>
         <div class="node s-closed"><span class="n">Running text (EN/DE)</span><span class="d">scored against shuffled baselines</span></div>
         <div class="node s-closed"><span class="n">Autokey (forward and backward), progressive</span><span class="d">std/KA, clue, dictionary alphabets; near-miss tail at noise level</span></div>
-        <div class="node s-closed"><span class="n">Interrupted / event-driven keys</span><span class="d">restart or pause on letters, words, carved lines: 11k models × 842k alphabets</span></div>
-        <div class="node s-closed"><span class="n">Clock and date streams</span><span class="d">1.35M Berlin-clock, time-zone and K2-date streams × 8.4M alphabet variants</span></div>
-        <div class="node s-partial"><span class="n">Cipher devices</span><span class="d">M-94, Wheatstone 27/26, Chaocipher (clue × clue, clue × dictionary, dictionary × std) ruled out; strip ciphers need unpublished alphabets</span></div>
+        <div class="node s-closed"><span class="n">Interrupted / event-driven keys</span><span class="d">restart or pause on letters, words, carved lines: 11k models × dictionary and phrase alphabets</span></div>
+        <div class="node s-closed"><span class="n">Clock and date streams</span><span class="d">1.35M Berlin-clock, time-zone and K2-date streams × dictionary and phrase alphabets</span></div>
+        <div class="node s-partial"><span class="n">Cipher devices</span><span class="d">M-94, Wheatstone 27/26, Chaocipher (clue × clue, clue × dictionary, dictionary × std, phrase × clue) at baseline; phrase × phrase and full dictionary × dictionary open</span></div>
         <div class="node s-none"><span class="n">Key sheet / one-time pad</span><span class="d">unrecoverable from 24 letters</span></div>
       </div>
       <div class="layer">
@@ -254,19 +254,19 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
           <tr><th scope="row">Interrupted keys<small>restart/pause on triggers</small></th>
             <td><span class="pill s-closed">ruled out</span></td>
             <td><span class="pill s-closed">ruled out</span><span class="note">Quagmire IV, 116² pairs</span></td>
-            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">Quag I–III, 0 exact; partial 23/24 ties both shuffles. Quag IV phrase × clue not run</span></td>
             <td><span class="pill s-closed">ruled out</span><span class="note">11,077 models × 842k</span></td>
             <td><span class="pill s-under">undecidable</span></td></tr>
           <tr><th scope="row">Clock / time streams<small>Berlin clock, zones, dates</small></th>
             <td><span class="pill s-closed">ruled out</span></td>
             <td><span class="pill s-closed">ruled out</span><span class="note">Quagmire IV, 116² pairs</span></td>
-            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-closed">ruled out</span><span class="note">0 exact on all 10 arrangements; Q3 partial 13/24 ties both shuffles</span></td>
             <td><span class="pill s-closed">ruled out</span><span class="note">1.35M streams × 8.4M vectors</span></td>
             <td><span class="pill s-none">untestable</span></td></tr>
           <tr><th scope="row">Chaocipher<small>self-modifying disks</small></th>
             <td><span class="pill s-closed">ruled out</span></td>
             <td><span class="pill s-closed">ruled out</span><span class="note">116² pairs</span></td>
-            <td><span class="pill s-gap">not tested</span></td>
+            <td><span class="pill s-partial">partly</span><span class="note">phrase × 116 clue disks, including A–Z/KA and reverses: 0 exact, partial 11/24 ties both shuffles. Phrase × phrase and phrase × dictionary open</span></td>
             <td><span class="pill s-partial">partly</span><span class="note">clue × dictionary (10¹⁰ rows) and vs A–Z/KA closed; full dictionary × dictionary open</span></td>
             <td><span class="pill s-none">untestable</span></td></tr>
           <tr><th scope="row">Two stages<small>different tableaux</small></th>
@@ -316,8 +316,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   <section aria-labelledby="gap-h">
     <div><h2 id="gap-h">Gaps, ranked</h2><p class="sub">Ranked by plausibility for a 1989 hand cipher and by the cost of testing.</p></div>
     <ol class="gaps">
-      <li><div class="body"><h3>Sanborn-phrase alphabets × interrupted keys, clock streams, Chaocipher</h3><p>The 613k phrase alphabets are now closed for periodic, digit, running, linear and autokey structures. The three newest families were run with clue and dictionary alphabets only.</p></div><span class="cost">hours</span></li>
-      <li><div class="body"><h3>Chaocipher, full dictionary × dictionary</h3><p>About 10¹³ rows. A 1M random sample and the whole clue × dictionary block are at the shuffled baseline, and Byrne's rule was unpublished in 1989.</p></div><span class="cost">weeks; low prior</span></li>
+      <li><div class="body"><h3>Phrase alphabets × keyword-through-grid, and × two stages</h3><p>Those two matrix cells are still red. Interrupted keys, clock streams, and Chaocipher against the clue disks, including A–Z and KRYPTOS, are at the shuffled baseline.</p></div><span class="cost">hours to days</span></li>
+      <li><div class="body"><h3>Chaocipher, the unsearched disk pairings</h3><p>Full dictionary × dictionary is about 10¹³ rows. Phrase × phrase is 5.87×10¹³ rows (8,272 h) and phrase × dictionary is 1.61×10¹⁴ rows (22,710 h) at the measured rate. The searched blocks, including phrase × clue, sit at the shuffled baseline, and Byrne's rule was unpublished in 1989.</p></div><span class="cost">weeks; low prior</span></li>
       <li><div class="body"><h3>Two stages with longer periods or three stages</h3><p>Two tableaux with L1, L2 ≤ 12 sit at baseline. Longer periods are mostly undecidable with 24 cribs, and three stages are out of reach.</p></div><span class="cost">days; mostly undecidable</span></li>
       <li><div class="body"><h3>Unpublished material</h3><p>Strip-cipher sheets, arbitrary non-keyword alphabets, one-time key sheets. Nothing to search against.</p></div><span class="cost">blocked</span></li>
       <li><div class="body"><h3>Undecidable cells</h3><p>Mask with key lengths 13, 16, 19, 20, 23, 24, 26; both alphabets free with long keys; mask + grid keys at widths above ~11. These need more known plaintext than 24 letters.</p></div><span class="cost">blocked</span></li>
@@ -325,6 +325,6 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   </section>
 
   <footer>
-    Built from the session's test logs. Code, data and full results are in <span class="mono">~/Documents/code/kryptos-k4</span> (commits through the morning of 2026-10-18). Every tester was validated by recovering a planted solution before it was run on K4.
+    Built from the session's test logs. Code, data and full results are in this repository (commits through 2026-10-21). Every tester was validated by recovering a planted solution before it was run on K4. K4 is not solved.
   </footer>
 </div>
