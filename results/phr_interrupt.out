@@ -1,0 +1,19 @@
+phrase alphabets 613,440 sha256/16=46412e317b7a1253 first=AAASANBOR/s last=ZONINGPERMISSIONSSOINEXCHANGE/t-rev
+scope: fe_interrupt models with >= 8 checks; Quagmire I-III (AA, AZ/A, A/AZ, KA/A, A/KA) x vig/beau. Quag IV phrase x phrase not run (same omission as dictionary x dictionary). Quag IV phrase x 116 clue is estimated from the Session 2 matmul rate and not run.
+alphabet strings built (2s)
+planted-solution validation (fe_interrupt.planted, 4 mechanisms):
+planted recovered all 4 mechanisms: True
+[K4] majority-kernel self-check: True (model0 exact py=True miss=True Cbest=24 hist24=12685 match=True example=ct_restart_after T=A L=1) models=11,077
+partial probe 0.12 ms/key. All 10 arrangements x all alphabets x 3 ciphertexts estimated 0.61 h. Running that.
+shuf0 SHTZKGWFMEBTRXYZLKVSHESUTQFSATNILQQUONOTUKROKBPPKBCWOZGWRAJFUFRGJLCTXBKPSOUGQKNVJBIAADWDLKISWDUIZ
+shuf1 WSKMIEWFGVUNDOPGBQCSLJTLOPQSZFATSDKQYWGGBZWUKCKUXRABFARUUTRTTINVUEORQFHOTLXWBKIKHLNJOSZJKAPBSIDKZ
+[K4] models 11,077 (>=8 checks) expected exact fits by chance 0.018
+[K4] slice cross-check n=4000: scan hits 0 majority-24 0 (54s)
+[K4] exact fits 0  partial best 23/24 at ('AA', 'vig', 'ONTHISFOR/s', 'ct_restart_after T=KO L=20', 23)  plan=10 arr x 613,440 alph  hist>=20: {20:846786, 21:28338, 22:566, 23:4}  (766s)
+[shuf0] models 12,637 (>=8 checks) expected exact fits by chance 0.025
+[shuf0] exact fits 0  partial best 23/24 at ('AKA', 'vig', 'SBROWNASTRIP/t-rev', 'ct_restart_after T=CI L=19', 23)  plan=10 arr x 613,440 alph  hist>=20: {20:837448, 21:24548, 22:430, 23:6}  (1117s)
+[shuf1] models 10,864 (>=8 checks) expected exact fits by chance 0.017
+[shuf1] exact fits 0  partial best 23/24 at ('AA', 'vig', 'GEOLOGICAL/t', 'ct_restart_at T=A L=16', 23)  plan=10 arr x 613,440 alph  hist>=20: {20:640066, 21:17810, 22:306, 23:6}  (1333s)
+estimate Quag IV phrase x 116 clue, both directions, vig/beau, 3 ciphertexts: 853,908,480 key vectors, ~8.8 h at the Session 2 rate of 26,817 vectors/s. Not run.
+SUMMARY family=interrupt combinations=613440x11077x10 exact_k4=0 exact_s0=0 exact_s1=0 partial_k4=23/24 partial_s0=23/24 partial_s1=23/24 at_best_k4=4 at_best_s0=6 at_best_s1=6 planted=pass runtime_s=3272 coverage_exact=1.0000 coverage_partial=1.0000 partial_plan=10x613440 coverage_note=QuagI-III_exact_complete QuagIV_phrase_x_clue_not_run
+done Tue Oct 20 14:02:05 2026
